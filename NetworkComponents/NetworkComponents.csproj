@@ -48,13 +48,29 @@
     <Compile Include="Controls\AbstractNetworkDevice.Designer.cs">
       <DependentUpon>AbstractNetworkDevice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Hub.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Hub.Designer.cs">
+      <DependentUpon>Hub.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PC.Designer.cs">
+      <DependentUpon>PC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Exceptions.cs" />
     <Compile Include="Package.cs" />
+    <Compile Include="PackageManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\AbstractNetworkDevice.resx">
       <DependentUpon>AbstractNetworkDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PC.resx">
+      <DependentUpon>PC.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,3 +6,6 @@ D:\Programming\_STUDY\NetworkSim\NetworkSim\obj\Debug\NetworkSim.Properties.Reso
 D:\Programming\_STUDY\NetworkSim\NetworkSim\obj\Debug\NetworkSim.csproj.GenerateResource.Cache
 D:\Programming\_STUDY\NetworkSim\NetworkSim\obj\Debug\NetworkSim.exe
 D:\Programming\_STUDY\NetworkSim\NetworkSim\obj\Debug\NetworkSim.pdb
+D:\Programming\_STUDY\NetworkSim\NetworkSim\bin\Debug\NetworkComponents.dll
+D:\Programming\_STUDY\NetworkSim\NetworkSim\bin\Debug\NetworkComponents.pdb
+D:\Programming\_STUDY\NetworkSim\NetworkSim\obj\Debug\NetworkSim.Form1.resources

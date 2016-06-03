@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace NetworkComponents.Controls
 {
@@ -18,7 +19,7 @@ namespace NetworkComponents.Controls
 		/// <summary>
 		/// Колисчество интерфейсов
 		/// </summary>
-		protected readonly int InterfacesCount;
+		protected abstract int InterfacesCount { get; }
 
 		//Список подключенных устройств
 		//Ключ - номер порта, к которому 
@@ -30,7 +31,7 @@ namespace NetworkComponents.Controls
 		/// <summary>
 		/// Название (для визуализации)
 		/// </summary>
-		public String Name
+		public string Name
 		{
 			get { return lblName.Text; }
 			set { lblName.Text = value; }
@@ -79,20 +80,45 @@ namespace NetworkComponents.Controls
 		}
 
 		/// <summary>
+		/// Подключает другое устройство к этому устройству
+		/// </summary>
+		/// <param name="port_number">Номер порта, к которму подключается</param>
+		/// <param name="other_port_number">Номер порта на другом устройстве, которым оно полкючается</param>
+		/// <param name="device">Подключаемое устройство</param>
+		public void DuplexConnect(int port_number, int other_port_number, AbstractNetworkDevice device)
+		{
+			Connect(port_number, device);
+			device.Connect(other_port_number, this);
+		}
+
+		/// <summary>
 		/// "Событие" получения пакета
 		/// </summary>
 		/// <param name="package">Входящий пакет</param>
-		public void ReceivePacakge(Package package)
+		public void ReceivePacakge(Package package, AbstractNetworkDevice sender)
 		{
-			ProcessPackage(package);
+			ProcessPackage(package, sender);
 		}
 
 		/// <summary>
 		/// Обработка пакета
 		/// </summary>
 		/// <param name="package"></param>
-		public abstract void ProcessPackage(Package package);
+		public abstract void ProcessPackage(Package package, AbstractNetworkDevice sender);
 
 	
+		//----------------------------------------------
+		//Отправляет пакет
+		protected void send(int port, Package package)
+		{
+			if (!connected_devices.ContainsKey(port))
+				throw new ArgumentException("Device to this port not connected");
+
+			Debug.WriteLine(Name + " send package "+package+" to " + connected_devices[port].Name);
+
+			package.AddStage(this);
+			PackageManager.AddPackage(package);
+			connected_devices[port].ReceivePacakge(package, this);
+		}
 	}
 }

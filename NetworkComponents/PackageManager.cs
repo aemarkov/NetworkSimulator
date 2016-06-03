@@ -13,12 +13,12 @@ namespace NetworkComponents
 	{
 		static List<Package> packages = new List<Package>();
 
-		static void Clear()
+		public static void Clear()
 		{
 			packages.Clear();
 		}
 
-		static void AddPackage(Package package)
+		public static void AddPackage(Package package)
 		{
 			if (!packages.Contains(package))
 				packages.Add(package);
