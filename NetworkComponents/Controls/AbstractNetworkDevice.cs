@@ -19,29 +19,37 @@ namespace NetworkComponents.Controls
 		/// <summary>
 		/// Колисчество интерфейсов
 		/// </summary>
-		protected abstract int InterfacesCount { get; }
+		public abstract int InterfacesCount { get; }
 
 		//Список подключенных устройств
-		//Ключ - номер порта, к которому 
-		protected Dictionary<int,AbstractNetworkDevice> connected_devices;
+		//Ключ - номер порта, к которому подключено устройство
+		protected Dictionary<int,AbstractNetworkDevice> ConnectedDevices { get; set; }
 
 		//IP адерес этого устройств
-		protected string[] interface_adresses;
+		public IPAdress[] InterfaceAdresses { get; private set; }
 
 		/// <summary>
 		/// Название (для визуализации)
 		/// </summary>
-		public string Name
+		public new string Name
 		{
 			get { return lblName.Text; }
 			set { lblName.Text = value; }
 		}
 
+		/////////////////////////////////////////////////////////////////////////////////////////////////
+		/// НАСТРОЙКА
+		/////////////////////////////////////////////////////////////////////////////////////////////////
+
 		public AbstractNetworkDevice()
 		{
 			InitializeComponent();
-			connected_devices = new Dictionary<int, AbstractNetworkDevice>();
-
+			ConnectedDevices = new Dictionary<int, AbstractNetworkDevice>();
+			//InterfaceAdresses = new IPAdress[InterfacesCount];
+			//for (int i = 0; i < InterfacesCount; i++)
+			//	InterfaceAdresses[i] = new IPAdress();
+			
+			//Пишем номера портов на форме
 			StringBuilder builder = new StringBuilder();
 			for (int i = 0; i < InterfacesCount; i++)
 				builder.Append(i).Append(" ");
@@ -52,15 +60,24 @@ namespace NetworkComponents.Controls
 		/// <summary>
 		/// Устанавливает адреса интерфейсов
 		/// </summary>
-		/// <param name="ips"></param>
-		public void SetIP(params string[] ips)
+		/// <param name="ips">IP-адрес</param>
+		public void SetIP(params IPAdress[] ips)
 		{
 			if (ips.Length != InterfacesCount)
 				throw new ArgumentException("Invalid number of IP adresses");
 
-			interface_adresses = ips;
+			InterfaceAdresses = ips;
 		}
 
+		public void SetIP(params String[] ips)
+		{
+			if (ips.Length != InterfacesCount)
+				throw new ArgumentException("Invalid number of IP adresses");
+
+			InterfaceAdresses = new IPAdress[InterfacesCount];
+			for (int i = 0; i < ips.Length; i++)
+				InterfaceAdresses[i] = new IPAdress(ips[i]);
+		}
 
 		/// <summary>
 		/// Подключает другое устройство к этому устройству
@@ -73,11 +90,15 @@ namespace NetworkComponents.Controls
 			if ((port_number < 0) || (port_number >= InterfacesCount))
 				throw new NoSuchInterfaceException(port_number);
 
-			if (connected_devices.ContainsKey(port_number))
+			if (ConnectedDevices.ContainsKey(port_number))
 				throw new InterfaceAlreadyConnectedException();
 
-			connected_devices.Add(port_number, device);
+			ConnectedDevices.Add(port_number, device);
 		}
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////
+		/// СЕТЕВОЕ ПОВЕДЕНИЕ
+		/////////////////////////////////////////////////////////////////////////////////////////////////
 
 		/// <summary>
 		/// Подключает другое устройство к этому устройству
@@ -108,17 +129,22 @@ namespace NetworkComponents.Controls
 
 	
 		//----------------------------------------------
+
 		//Отправляет пакет
 		protected void send(int port, Package package)
 		{
-			if (!connected_devices.ContainsKey(port))
+			if (!ConnectedDevices.ContainsKey(port))
 				throw new ArgumentException("Device to this port not connected");
 
-			Debug.WriteLine(Name + " send package "+package+" to " + connected_devices[port].Name);
+			
+			if(InterfaceAdresses!=null)
+				Debug.WriteLine(Name +" ("+InterfaceAdresses[port]+") send package "+package+" to " + ConnectedDevices[port].Name);
+			else
+				Debug.WriteLine(Name + " send package " + package + " to " + ConnectedDevices[port].Name);
 
 			package.AddStage(this);
 			PackageManager.AddPackage(package);
-			connected_devices[port].ReceivePacakge(package, this);
+			ConnectedDevices[port].ReceivePacakge(package, this);
 		}
 	}
 }

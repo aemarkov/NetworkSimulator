@@ -60,7 +60,14 @@
     <Compile Include="Controls\PC.Designer.cs">
       <DependentUpon>PC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Server.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Server.Designer.cs">
+      <DependentUpon>Server.cs</DependentUpon>
+    </Compile>
     <Compile Include="Exceptions.cs" />
+    <Compile Include="IPAdress.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="PackageManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

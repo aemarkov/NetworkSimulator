@@ -23,8 +23,8 @@ namespace NetworkComponents
 			REJECTED
 		}
 
-		public string StartIP { get; set; }
-		public string EndIP { get; set; }
+		public System.Net.IPAddress StartIP { get; set; }
+		public System.Net.IPAddress EndIP { get; set; }
 		public State PackageState { get; set; }
 
 
@@ -36,6 +36,15 @@ namespace NetworkComponents
 		{
 			Trace = new List<AbstractNetworkDevice>();
 			PackageState = State.SENDING;
+		}
+
+		/// <summary>
+		/// Создает пакет на основе строкоого представления конечного адреса
+		/// </summary>
+		/// <param name="end_ip"></param>
+		public Package(string end_ip):this()
+		{
+			EndIP = System.Net.IPAddress.Parse(end_ip);
 		}
 
 		/// <summary>

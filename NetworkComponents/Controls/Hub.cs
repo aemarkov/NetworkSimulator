@@ -12,8 +12,8 @@ namespace NetworkComponents.Controls
 {
 	public partial class Hub : AbstractNetworkDevice
 	{
-		protected override int InterfacesCount { get { return 8; } }
-
+		public int InterfacesCount_U { get; set; } = 8;
+		public override int InterfacesCount { get { return InterfacesCount_U; } }
 		public Hub()
 		{
 			InitializeComponent();
@@ -25,7 +25,7 @@ namespace NetworkComponents.Controls
 		 */
 		public override void ProcessPackage(Package package, AbstractNetworkDevice sender)
 		{
-			foreach(var device in connected_devices)
+			foreach(var device in ConnectedDevices)
 			{
 				if (!device.Value.Equals(sender))
 					send(device.Key, package);

@@ -18,7 +18,7 @@ namespace NetworkComponents.Controls
 	/// </summary>
 	public partial class PC : AbstractNetworkDevice
 	{
-		protected override int InterfacesCount { get { return 1; } }
+		public override int InterfacesCount { get { return 1; } }
 
 		public PC()
 		{
@@ -31,15 +31,15 @@ namespace NetworkComponents.Controls
 		 */
 		public override void ProcessPackage(Package package, AbstractNetworkDevice sender)
 		{
-			if (package.EndIP == interface_adresses[0])
+			if (package.EndIP.Equals(InterfaceAdresses[0].IP) && InterfaceAdresses[0].IsInSameSubnet(package.StartIP))
 			{
 				package.PackageState = Package.State.RECEIVED;
-				Debug.WriteLine("PC " + interface_adresses[0] + " received package from " + package.StartIP);
+				Debug.WriteLine(Name + " ("+InterfaceAdresses[0]+") received package from " + package.StartIP);
 			}
 			else
 			{
 				package.PackageState = Package.State.REJECTED;
-				Debug.WriteLine("PC "+ interface_adresses[0] + " rejected package "+package);
+				Debug.WriteLine(Name + " ("+InterfaceAdresses[0]+") rejected package "+package);
 			}
 		}
 
@@ -49,7 +49,7 @@ namespace NetworkComponents.Controls
 		/// <param name="package">Пакет</param>
 		public void SendPackage(Package package)
 		{
-			package.StartIP = interface_adresses[0];
+			package.StartIP = InterfaceAdresses[0].IP;
 			send(0, package);
 		}
 	}
