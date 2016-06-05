@@ -52,8 +52,14 @@ namespace NetworkComponents.Controls
 		public AbstractNetworkDevice()
 		{
 			InitializeComponent();
+			this.Load += AbstractNetworkDevice_Load;
 			ConnectedDevices = new Dictionary<int, AbstractNetworkDevice>();
 
+			Mover = new Mover(this);
+		}
+
+		private void AbstractNetworkDevice_Load(object sender, EventArgs e)
+		{
 			StringBuilder builder = new StringBuilder();
 
 			//Пишем номера портов на форме
@@ -61,11 +67,9 @@ namespace NetworkComponents.Controls
 				builder.Append(i).Append(" ");
 
 			lblPorts.Text = builder.ToString();
-
-			Mover = new Mover(this);
 		}
 
-		
+
 		/// <summary>
 		/// Устанавливает адреса интерфейсов
 		/// </summary>

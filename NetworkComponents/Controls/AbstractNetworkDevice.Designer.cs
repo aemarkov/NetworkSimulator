@@ -62,6 +62,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.lblPorts.AutoSize = true;
 			this.lblPorts.Location = new System.Drawing.Point(4, 44);
+			this.lblPorts.MaximumSize = new System.Drawing.Size(123, 1000);
 			this.lblPorts.Name = "lblPorts";
 			this.lblPorts.Size = new System.Drawing.Size(35, 13);
 			this.lblPorts.TabIndex = 2;

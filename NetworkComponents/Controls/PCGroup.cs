@@ -53,7 +53,14 @@ namespace NetworkComponents.Controls
 			fill_combo_box();
 		}
 
-		
+
+		public void SetPCs(string start_ip, string end_ip, string mask, string gateway)
+		{
+			SetPCs(IPAddress.Parse(start_ip), IPAddress.Parse(end_ip), IPAddress.Parse(mask), (gateway!=null)? IPAddress.Parse(gateway):null );
+		}
+
+
+
 		/// <summary>
 		/// Подключает пекарни к устройству
 		/// </summary>

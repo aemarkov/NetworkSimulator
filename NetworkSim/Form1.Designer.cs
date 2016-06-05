@@ -38,15 +38,17 @@
 			this.table_packages = new System.Windows.Forms.DataGridView();
 			this.column_package = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.column_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.trackBar1 = new System.Windows.Forms.TrackBar();
 			this.netDrawer1 = new NetworkComponents.Controls.NetDrawer();
-			this.pcGroup1 = new NetworkComponents.Controls.PCGroup();
-			this.gate1 = new NetworkComponents.Controls.Gate();
-			this.pc4 = new NetworkComponents.Controls.PC();
-			this.pc3 = new NetworkComponents.Controls.PC();
-			this.server1 = new NetworkComponents.Controls.Server();
+			this.server3 = new NetworkComponents.Controls.Server();
 			this.hub2 = new NetworkComponents.Controls.Hub();
+			this.pcGroup2 = new NetworkComponents.Controls.PCGroup();
+			this.server2 = new NetworkComponents.Controls.Server();
+			this.server1 = new NetworkComponents.Controls.Server();
 			this.hub1 = new NetworkComponents.Controls.Hub();
+			this.pcGroup1 = new NetworkComponents.Controls.PCGroup();
 			((System.ComponentModel.ISupportInitialize)(this.table_packages)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
 			this.netDrawer1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -138,94 +140,106 @@
 			this.column_status.Name = "column_status";
 			this.column_status.ReadOnly = true;
 			// 
+			// trackBar1
+			// 
+			this.trackBar1.Location = new System.Drawing.Point(805, 13);
+			this.trackBar1.Minimum = 1;
+			this.trackBar1.Name = "trackBar1";
+			this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
+			this.trackBar1.Size = new System.Drawing.Size(45, 486);
+			this.trackBar1.TabIndex = 9;
+			this.trackBar1.Value = 10;
+			this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+			// 
 			// netDrawer1
 			// 
 			this.netDrawer1.BackColor = System.Drawing.Color.White;
-			this.netDrawer1.Controls.Add(this.pcGroup1);
-			this.netDrawer1.Controls.Add(this.gate1);
-			this.netDrawer1.Controls.Add(this.pc4);
-			this.netDrawer1.Controls.Add(this.pc3);
-			this.netDrawer1.Controls.Add(this.server1);
+			this.netDrawer1.Controls.Add(this.server3);
 			this.netDrawer1.Controls.Add(this.hub2);
+			this.netDrawer1.Controls.Add(this.pcGroup2);
+			this.netDrawer1.Controls.Add(this.server2);
+			this.netDrawer1.Controls.Add(this.server1);
 			this.netDrawer1.Controls.Add(this.hub1);
+			this.netDrawer1.Controls.Add(this.pcGroup1);
 			this.netDrawer1.Location = new System.Drawing.Point(12, 12);
 			this.netDrawer1.Name = "netDrawer1";
-			this.netDrawer1.Size = new System.Drawing.Size(839, 486);
+			this.netDrawer1.Size = new System.Drawing.Size(791, 486);
 			this.netDrawer1.TabIndex = 0;
 			// 
-			// pcGroup1
+			// server3
 			// 
-			this.pcGroup1.BackColor = System.Drawing.SystemColors.ControlDark;
-			this.pcGroup1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pcGroup1.Location = new System.Drawing.Point(20, 150);
-			this.pcGroup1.Name = "pcGroup1";
-			this.pcGroup1.Size = new System.Drawing.Size(130, 167);
-			this.pcGroup1.TabIndex = 18;
+			this.server3.BackColor = System.Drawing.Color.Silver;
+			this.server3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.server3.InterfacesCount_U = 2;
+			this.server3.Location = new System.Drawing.Point(342, 232);
+			this.server3.Name = "server3";
+			this.server3.Size = new System.Drawing.Size(130, 120);
+			this.server3.TabIndex = 6;
 			// 
-			// gate1
+			// hub2
 			// 
-			this.gate1.BackColor = System.Drawing.Color.Silver;
-			this.gate1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.gate1.Location = new System.Drawing.Point(503, 318);
-			this.gate1.Name = "gate1";
-			this.gate1.Size = new System.Drawing.Size(130, 118);
-			this.gate1.TabIndex = 17;
+			this.hub2.BackColor = System.Drawing.Color.Silver;
+			this.hub2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.hub2.InterfacesCount_U = 20;
+			this.hub2.Location = new System.Drawing.Point(179, 232);
+			this.hub2.Name = "hub2";
+			this.hub2.Size = new System.Drawing.Size(130, 120);
+			this.hub2.TabIndex = 5;
 			// 
-			// pc4
+			// pcGroup2
 			// 
-			this.pc4.BackColor = System.Drawing.Color.Silver;
-			this.pc4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pc4.Gateway = null;
-			this.pc4.Location = new System.Drawing.Point(674, 260);
-			this.pc4.Name = "pc4";
-			this.pc4.Size = new System.Drawing.Size(130, 140);
-			this.pc4.TabIndex = 16;
+			this.pcGroup2.BackColor = System.Drawing.SystemColors.ControlDark;
+			this.pcGroup2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pcGroup2.Location = new System.Drawing.Point(20, 215);
+			this.pcGroup2.Name = "pcGroup2";
+			this.pcGroup2.Size = new System.Drawing.Size(130, 167);
+			this.pcGroup2.TabIndex = 4;
 			// 
-			// pc3
+			// server2
 			// 
-			this.pc3.BackColor = System.Drawing.Color.Silver;
-			this.pc3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pc3.Gateway = null;
-			this.pc3.Location = new System.Drawing.Point(674, 32);
-			this.pc3.Name = "pc3";
-			this.pc3.Size = new System.Drawing.Size(130, 140);
-			this.pc3.TabIndex = 15;
+			this.server2.BackColor = System.Drawing.Color.Silver;
+			this.server2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.server2.InterfacesCount_U = 2;
+			this.server2.Location = new System.Drawing.Point(539, 130);
+			this.server2.Name = "server2";
+			this.server2.Size = new System.Drawing.Size(130, 120);
+			this.server2.TabIndex = 3;
 			// 
 			// server1
 			// 
 			this.server1.BackColor = System.Drawing.Color.Silver;
 			this.server1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.server1.InterfacesCount_U = 2;
-			this.server1.Location = new System.Drawing.Point(334, 32);
+			this.server1.Location = new System.Drawing.Point(342, 48);
 			this.server1.Name = "server1";
 			this.server1.Size = new System.Drawing.Size(130, 120);
-			this.server1.TabIndex = 12;
-			// 
-			// hub2
-			// 
-			this.hub2.BackColor = System.Drawing.Color.Silver;
-			this.hub2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.hub2.InterfacesCount_U = 8;
-			this.hub2.Location = new System.Drawing.Point(518, 186);
-			this.hub2.Name = "hub2";
-			this.hub2.Size = new System.Drawing.Size(100, 100);
-			this.hub2.TabIndex = 4;
+			this.server1.TabIndex = 2;
 			// 
 			// hub1
 			// 
 			this.hub1.BackColor = System.Drawing.Color.Silver;
 			this.hub1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.hub1.InterfacesCount_U = 8;
-			this.hub1.Location = new System.Drawing.Point(190, 186);
+			this.hub1.InterfacesCount_U = 20;
+			this.hub1.Location = new System.Drawing.Point(179, 48);
 			this.hub1.Name = "hub1";
-			this.hub1.Size = new System.Drawing.Size(100, 100);
-			this.hub1.TabIndex = 2;
+			this.hub1.Size = new System.Drawing.Size(130, 120);
+			this.hub1.TabIndex = 1;
+			// 
+			// pcGroup1
+			// 
+			this.pcGroup1.BackColor = System.Drawing.SystemColors.ControlDark;
+			this.pcGroup1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pcGroup1.Location = new System.Drawing.Point(20, 26);
+			this.pcGroup1.Name = "pcGroup1";
+			this.pcGroup1.Size = new System.Drawing.Size(130, 167);
+			this.pcGroup1.TabIndex = 0;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1470, 700);
+			this.Controls.Add(this.trackBar1);
 			this.Controls.Add(this.table_packages);
 			this.Controls.Add(this.trace_details);
 			this.Controls.Add(this.label2);
@@ -237,6 +251,7 @@
 			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			((System.ComponentModel.ISupportInitialize)(this.table_packages)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
 			this.netDrawer1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -246,8 +261,6 @@
 		#endregion
 
 		private NetworkComponents.Controls.NetDrawer netDrawer1;
-		private NetworkComponents.Controls.Hub hub2;
-		private NetworkComponents.Controls.Hub hub1;
 		private System.Windows.Forms.TextBox txtLog;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.Button btnReset;
@@ -257,11 +270,14 @@
 		private System.Windows.Forms.DataGridView table_packages;
 		private System.Windows.Forms.DataGridViewTextBoxColumn column_package;
 		private System.Windows.Forms.DataGridViewTextBoxColumn column_status;
-		private NetworkComponents.Controls.Server server1;
-		private NetworkComponents.Controls.PC pc4;
-		private NetworkComponents.Controls.PC pc3;
-		private NetworkComponents.Controls.Gate gate1;
+		private NetworkComponents.Controls.Hub hub1;
 		private NetworkComponents.Controls.PCGroup pcGroup1;
+		private System.Windows.Forms.TrackBar trackBar1;
+		private NetworkComponents.Controls.Server server1;
+		private NetworkComponents.Controls.Hub hub2;
+		private NetworkComponents.Controls.PCGroup pcGroup2;
+		private NetworkComponents.Controls.Server server2;
+		private NetworkComponents.Controls.Server server3;
 	}
 }
 

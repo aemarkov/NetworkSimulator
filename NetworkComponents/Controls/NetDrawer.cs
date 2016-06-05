@@ -17,6 +17,7 @@ namespace NetworkComponents.Controls
 	public partial class NetDrawer : Panel
 	{
 		private Dictionary<UserControl, List<UserControl>> connections;
+		private float zoom=1;
 
 		public NetDrawer()
 		{
@@ -73,11 +74,21 @@ namespace NetworkComponents.Controls
 					/*foreach (var pc in group.pcs)
 						make_connections(pc);*/
 
-					var connected = group.pcs.First().Connections.First().Value;
-					connections.Add(group, new List<UserControl>() {connected});
+					var con = group.pcs.FirstOrDefault()?.Connections;
+					if (con != null  && con.Count!=0)
+					{
+						var connected = con.First().Value;
+						connections.Add(group, new List<UserControl>() { connected });
+					}
 				}
 				
 			}
+		}
+
+		public void Zoom(float zoom)
+		{
+			this.zoom = zoom;
+			Invalidate();
 		}
 
 		private void make_connections(AbstractNetworkDevice device)
@@ -94,8 +105,9 @@ namespace NetworkComponents.Controls
 		//Рисует
 		protected override void OnPaint(PaintEventArgs e)
 		{
-
-			base.OnPaint(e);
+			e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+			e.Graphics.ScaleTransform(zoom, zoom);
+			
 			foreach(var device in connections)
 			{
 				Point d_p = new Point(device.Key.Left + device.Key.Width/2, device.Key.Top+device.Key.Height/2);
@@ -110,6 +122,8 @@ namespace NetworkComponents.Controls
 					e.Graphics.DrawLine(Pens.Black, d_p, c_d_p);
 				}
 			}
+
+			e.Graphics.ScaleTransform(zoom, zoom);
 		}
 	}
 }

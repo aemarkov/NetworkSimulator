@@ -26,34 +26,23 @@ namespace NetworkSim
 			PackageManager.NewPackage += PackageManager_NewPackage;
 			table_packages.CellClick += Table_packages_CellClick;
 
-			server1.SetIP("192.168.1.1/25", "192.168.1.130/25");
-			server1.SetProxy(
-				@"192.168.1.2;192.168.1.131;pass
-				  192.168.1.131;192.168.1.2;pass
-				  any;any;deny");
 
-			server1.SetRoute(
-				@"192.168.1.128;255.255.255.128;-;1
-				  192.168.1.0;255.255.255.128;-;0");
+			pcGroup1.SetPCs("192.168.1.2", "192.168.1.3", "255.255.255.0", "192.168.1.1");
+			pcGroup2.SetPCs("192.168.2.2", "192.168.2.3", "255.255.255.0", "192.168.2.1");
 
-
-			pcGroup1.SetPCs(IPAddress.Parse("192.168.1.2"), IPAddress.Parse("192.168.1.5"), IPAddress.Parse("255.255.255.128"), IPAddress.Parse("192.168.1.1"));
-
-			pc3.SetIP("192.168.1.131/25");
-			pc3.SetGateway("192.168.1.130");
-
-			pc4.SetIP("192.168.1.132/25");
-			pc4.SetGateway("192.168.1.130");
-
-			gate1.SetIP("192.168.1.132/25");
+			server1.SetIP("192.168.1.1/24", "192.168.10.1/24");
+			server3.SetIP("192.168.2.1/24", "192.168.11.1/24");
+			server2.SetIP("192.168.10.2/24", "192.168.11.2/24");
+			
 
 			pcGroup1.Connect(hub1, 1);
-			hub1.DuplexConnect(0, 0, server1);
+			pcGroup2.Connect(hub2, 1);
 
-			server1.DuplexConnect(1, 2, hub2);
-			hub2.DuplexConnect(0, 0, pc3);
-			hub2.DuplexConnect(1, 0, pc4);
-			hub2.DuplexConnect(3, 0, gate1);
+			hub1.DuplexConnect(0, 0, server1);
+			hub2.DuplexConnect(0, 0, server3);
+
+			server1.DuplexConnect(1, 0, server2);
+			server3.DuplexConnect(1, 1, server2);
 
 
 			netDrawer1.Init();
@@ -115,6 +104,11 @@ namespace NetworkSim
 			}
 
 			trace_details.Text += Environment.NewLine + "STATUS: " + package.PackageState;
+		}
+
+		private void trackBar1_Scroll(object sender, EventArgs e)
+		{
+			netDrawer1.Zoom(trackBar1.Value / 10f);
 		}
 	}
 }
