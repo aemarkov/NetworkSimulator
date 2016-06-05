@@ -22,7 +22,7 @@ namespace NetworkSim
 		{
 			//hub1.Name = "hub1";
 
-			server1.SetIP("192.168.1.1/25", "192.168.1.130/25");
+		 server1.SetIP("192.168.1.1/25", "192.168.1.130/25");
 			server1.SetProxy(
 				@"192.168.1.2;192.168.1.131;pass
 				  192.168.1.131;192.168.1.2;pass
@@ -46,11 +46,19 @@ namespace NetworkSim
 			pc4.SetGateway("192.168.1.130");
 
 
-			pc1.DuplexConnect(0, 0, server1);
-			server1.DuplexConnect(1, 0, hub1);
-			hub1.DuplexConnect(1, 0, pc2);
-			hub1.DuplexConnect(2, 0, pc3);
+			pc1.DuplexConnect(0, 0, hub1);
+			pc2.DuplexConnect(0, 1, hub1);
+			hub1.DuplexConnect(2, 0, server1);
 
+			server1.DuplexConnect(1, 2, hub2);
+			hub2.DuplexConnect(0, 0, pc3);
+			hub2.DuplexConnect(1, 0, pc4);
+
+
+			netDrawer1.Init();
+			netDrawer1.UpdateConnections();
+
+			
 			pc1.SendPackage(new NetworkComponents.Package("192.168.1.131"));
 		}
 	}

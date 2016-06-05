@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace NetworkComponents.Controls
 {
@@ -16,6 +17,9 @@ namespace NetworkComponents.Controls
 	/// </summary>
 	public abstract partial class AbstractNetworkDevice : UserControl
 	{
+		public event Action<Point, AbstractNetworkDevice> DeviceMove;
+
+
 		/// <summary>
 		/// Колисчество интерфейсов
 		/// </summary>
@@ -24,6 +28,11 @@ namespace NetworkComponents.Controls
 		//Список подключенных устройств
 		//Ключ - номер порта, к которому подключено устройство
 		protected Dictionary<int,AbstractNetworkDevice> ConnectedDevices { get; set; }
+
+		/// <summary>
+		/// Список подключений (только для чтения)
+		/// </summary>
+		public ReadOnlyDictionary<int,AbstractNetworkDevice> Connections { get { return new ReadOnlyDictionary<int, AbstractNetworkDevice>(ConnectedDevices); } }
 
 		//IP адерес этого устройств
 		public IPAddressWithMask[] InterfaceAdresses { get; private set; }
@@ -45,9 +54,6 @@ namespace NetworkComponents.Controls
 		{
 			InitializeComponent();
 			ConnectedDevices = new Dictionary<int, AbstractNetworkDevice>();
-			//InterfaceAdresses = new IPAdress[InterfacesCount];
-			//for (int i = 0; i < InterfacesCount; i++)
-			//	InterfaceAdresses[i] = new IPAdress();
 			
 			//Пишем номера портов на форме
 			StringBuilder builder = new StringBuilder();
@@ -55,8 +61,15 @@ namespace NetworkComponents.Controls
 				builder.Append(i).Append(" ");
 
 			lblPorts.Text = builder.ToString();
+
+
+			this.MouseDown += AbstractNetworkDevice_MouseDown;
+			this.MouseUp += AbstractNetworkDevice_MouseUp;
+			this.MouseMove += AbstractNetworkDevice_MouseMove;
+			this.MouseLeave += AbstractNetworkDevice_MouseLeave;
 		}
 
+		
 		/// <summary>
 		/// Устанавливает адреса интерфейсов
 		/// </summary>
@@ -170,5 +183,49 @@ namespace NetworkComponents.Controls
 
 			return sb.ToString();
 		}
+
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////
+		/// ГРАФОН
+		/////////////////////////////////////////////////////////////////////////////////////////////////
+
+		//Перетаскивание
+		private Point previous_point;
+		private bool is_drag = false;
+
+		private void AbstractNetworkDevice_MouseLeave(object sender, EventArgs e)
+		{
+			is_drag = false;
+		}
+
+		private void AbstractNetworkDevice_MouseMove(object sender, MouseEventArgs e)
+		{
+			if (is_drag)
+			{
+				int delta_x = e.X - previous_point.X;
+				int delta_y = e.Y - previous_point.Y;
+
+				Left += delta_x;
+				Top += delta_y;
+
+				if(DeviceMove!=null)
+					DeviceMove(new Point(Left,Top), this);
+			}
+		}
+
+		private void AbstractNetworkDevice_MouseUp(object sender, MouseEventArgs e)
+		{
+			is_drag = false;
+		}
+
+		private void AbstractNetworkDevice_MouseDown(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Left)
+			{
+				previous_point = e.Location;
+				is_drag = true;
+			}
+		}
+
 	}
 }
