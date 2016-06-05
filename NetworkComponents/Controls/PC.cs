@@ -20,6 +20,15 @@ namespace NetworkComponents.Controls
 	{
 		public override int InterfacesCount { get { return 1; } }
 
+		/// <summary>
+		/// Основно шлюз
+		/// </summary>
+		public System.Net.IPAddress Gateway { get; set; }
+		public void SetGateway(string gateway)
+		{
+			Gateway = System.Net.IPAddress.Parse(gateway);
+		}
+
 		public PC()
 		{
 			InitializeComponent();
@@ -32,6 +41,7 @@ namespace NetworkComponents.Controls
 		public override void ProcessPackage(Package package, AbstractNetworkDevice sender)
 		{
 			string stage;
+			//Адресован ли пакет нам
 			if (package.EndIP.Peek().Equals(InterfaceAdresses[0].IP))
 			{
 				package.PackageState = Package.State.RECEIVED;
@@ -54,7 +64,20 @@ namespace NetworkComponents.Controls
 		public void SendPackage(Package package)
 		{
 			package.StartIP = InterfaceAdresses[0].IP;
-			send(0, package);
+
+			//Проверяем, находится ли получатель в той же подсети
+			if (InterfaceAdresses[0].IsInSameSubnet(package.EndIP.Peek()))
+				send(0, package);
+			else if(Gateway!=null)
+			{
+				//Отправляем через шлюз
+				package.EndIP.Push(Gateway);
+				send(0, package);
+			}
+			else
+			{
+				Debug.Write(Name + " (" + InterfaceAdresses[0] + ") DIDN'T send package " + package + " to " + ConnectedDevices[0].Name + ": OTHER SUBNET"); 
+			}
 		}
 	}
 }
