@@ -3,7 +3,7 @@ using System;
 /// <summary>
 /// Класс, описывающий адрес интерфейса-маска + адрес
 /// </summary>
-public class IPAddress
+public class IPAddressWithMask
 {
 	public System.Net.IPAddress IP { get; set; }
 	public System.Net.IPAddress Netmask { get; set; }
@@ -11,7 +11,7 @@ public class IPAddress
 	private Int32 ip;
 	private Int32 mask;
 
-	public IPAddress(System.Net.IPAddress ip, System.Net.IPAddress mask)
+	public IPAddressWithMask(System.Net.IPAddress ip, System.Net.IPAddress mask)
 	{
 		IP = ip;
 		Netmask = mask;
@@ -21,7 +21,7 @@ public class IPAddress
 	/// Создает новый IP адрес с маской на основе сокращенной записи
 	/// </summary>
 	/// <param name="ip_with_mask">Сокращенная запись адреса, например 192.168.1./24</param>
-	public IPAddress(string ip_with_mask)
+	public IPAddressWithMask(string ip_with_mask)
 	{
 		if (!ip_with_mask.Contains("/"))
 			throw new ArgumentException("String must contains mask (ipadress/mask)");
@@ -49,7 +49,7 @@ public class IPAddress
 	//localhost по-умолчанию
 	//В программе локалхост не используется, и по смыслу
 	//не отличается от пустых строк
-	public IPAddress()
+	public IPAddressWithMask()
 	{
 		IP = System.Net.IPAddress.Parse("127.0.0.1");
 		Netmask = System.Net.IPAddress.Parse("255.0.0.0");

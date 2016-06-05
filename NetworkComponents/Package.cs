@@ -20,6 +20,7 @@ namespace NetworkComponents
 			SENDING,
 			RECEIVED,
 			DENIED,
+			NO_ROUTE,
 			REJECTED
 		}
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Net;
 
 namespace NetworkComponents.Controls
 {
@@ -21,15 +22,17 @@ namespace NetworkComponents.Controls
 
 		//PROXY-таблица
 		private List<Proxy> proxy_table;
+		private List<Route> route_table;
 
 		public Server()
 		{
 			InitializeComponent();
 		}
 
-		public Server(string proxy_table):this()
+		public Server(string proxy_table, string route_table):this()
 		{
 			SetProxy(proxy_table);
+			SetRoute(route_table);
 		}
 
 		//Задает Proxy-таблицу
@@ -40,6 +43,16 @@ namespace NetworkComponents.Controls
 			foreach (var p in proxy)
 			{
 				this.proxy_table.Add(Proxy.Parse(p));
+			}
+		}
+
+		public void SetRoute(string route_table)
+		{
+			string[] route = route_table.Split('\n');
+			this.route_table = new List<Route>();
+			foreach(var r in route)
+			{
+				this.route_table.Add(Route.Parse(r));
 			}
 		}
 
@@ -68,16 +81,42 @@ namespace NetworkComponents.Controls
 
 				package.EndIP.Pop();
 				if (package.EndIP.Count == 0)
-				{
-					package.PackageState = Package.State.RECEIVED;
+				{				
 					stage = Name + " (" + InterfaceAdresses[port] + ") received package from " + package.StartIP;
 					Debug.WriteLine(stage);
 					package.AddStage(stage);
+					package.PackageState = Package.State.RECEIVED;
 					return;
 				}
 
 				//Пересылка дальше
-				Fbool ispass = is_pass(package);
+				//проверка по PROXY-таблице
+				bool ispass = is_pass(package);
+				if(!ispass)
+				{
+					stage = Name + " (" + InterfaceAdresses[port] + ") DENIED package " + package;
+					Debug.WriteLine(stage);
+					package.AddStage(stage);
+					package.PackageState = Package.State.DENIED;
+					return;
+				}
+
+
+				//Проверка по таблице маршрутизации
+				Route route = get_route(package.EndIP.Peek());
+				if(route==null)
+				{
+					stage = Name + " (" + InterfaceAdresses[port] + ") DON'T find route for package " + package;
+					Debug.WriteLine(stage);
+					package.AddStage(stage);
+					package.PackageState = Package.State.NO_ROUTE;
+				}
+
+				if (route.NextRouter != null)
+					package.EndIP.Push(route.NextRouter);
+
+
+				send(package, route.PortNo);
 			}
 			else
 			{
@@ -89,6 +128,16 @@ namespace NetworkComponents.Controls
 			}
 		}
 
+		//Отправка
+		private void send(Package package, int port)
+		{
+			//Проверяем, находится ли получатель в той же подсети
+			if (InterfaceAdresses[port].IsInSameSubnet(package.EndIP.Peek()))
+				send(port, package);
+			else
+				Debug.Write(Name + " (" + InterfaceAdresses[port] + ") DIDN'T send package " + package + " to " + ConnectedDevices[port].Name + ": OTHER SUBNET");
+		}
+			
 
 		//Проверяет пакет по proxy-таблице
 		private bool is_pass(Package package)
@@ -105,6 +154,17 @@ namespace NetworkComponents.Controls
 			}
 
 			return false;
+		}
+
+		private Route get_route(IPAddress adress)
+		{
+			foreach(var route in route_table)
+			{
+				if ((route.Destination == null) || (IPAddressWithMask.IsInSameSubnet(adress, route.Destination, route.Mask)))
+					return route;
+			}
+
+			return null;
 		}
 	}
 }

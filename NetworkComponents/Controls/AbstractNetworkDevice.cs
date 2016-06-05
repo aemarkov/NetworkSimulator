@@ -26,7 +26,7 @@ namespace NetworkComponents.Controls
 		protected Dictionary<int,AbstractNetworkDevice> ConnectedDevices { get; set; }
 
 		//IP адерес этого устройств
-		public IPAddress[] InterfaceAdresses { get; private set; }
+		public IPAddressWithMask[] InterfaceAdresses { get; private set; }
 
 		/// <summary>
 		/// Название (для визуализации)
@@ -61,7 +61,7 @@ namespace NetworkComponents.Controls
 		/// Устанавливает адреса интерфейсов
 		/// </summary>
 		/// <param name="ips">IP-адрес</param>
-		public void SetIP(params IPAddress[] ips)
+		public void SetIP(params IPAddressWithMask[] ips)
 		{
 			if (ips.Length != InterfacesCount)
 				throw new ArgumentException("Invalid number of IP adresses");
@@ -74,9 +74,9 @@ namespace NetworkComponents.Controls
 			if (ips.Length != InterfacesCount)
 				throw new ArgumentException("Invalid number of IP adresses");
 
-			InterfaceAdresses = new IPAddress[InterfacesCount];
+			InterfaceAdresses = new IPAddressWithMask[InterfacesCount];
 			for (int i = 0; i < ips.Length; i++)
-				InterfaceAdresses[i] = new IPAddress(ips[i]);
+				InterfaceAdresses[i] = new IPAddressWithMask(ips[i]);
 		}
 
 		/// <summary>
@@ -154,7 +154,7 @@ namespace NetworkComponents.Controls
 		}
 
 		//Переводит состояние трассировки в строку
-		public static string TraceToString(string sender_name, IPAddress sender_ip, int sender_port, string receiver_name, System.Net.IPAddress start_ip, System.Net.IPAddress end_ip)
+		public static string TraceToString(string sender_name, IPAddressWithMask sender_ip, int sender_port, string receiver_name, System.Net.IPAddress start_ip, System.Net.IPAddress end_ip)
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.Append(sender_name).Append(" (");
