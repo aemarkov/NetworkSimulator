@@ -31,16 +31,20 @@ namespace NetworkComponents.Controls
 		 */
 		public override void ProcessPackage(Package package, AbstractNetworkDevice sender)
 		{
-			if (package.EndIP.Equals(InterfaceAdresses[0].IP) && InterfaceAdresses[0].IsInSameSubnet(package.StartIP))
+			string stage;
+			if (package.EndIP.Peek().Equals(InterfaceAdresses[0].IP))
 			{
 				package.PackageState = Package.State.RECEIVED;
-				Debug.WriteLine(Name + " ("+InterfaceAdresses[0]+") received package from " + package.StartIP);
+				stage = Name + " ("+InterfaceAdresses[0]+") received package from " + package.StartIP;
 			}
 			else
 			{
 				package.PackageState = Package.State.REJECTED;
-				Debug.WriteLine(Name + " ("+InterfaceAdresses[0]+") rejected package "+package);
+				stage = Name + " ("+InterfaceAdresses[0]+") rejected package "+package;
 			}
+
+			Debug.WriteLine(stage);
+			package.AddStage(stage);
 		}
 
 		/// <summary>

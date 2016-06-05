@@ -29,8 +29,20 @@ public class IPAdress
 		string[] parts = ip_with_mask.Split('/');
 		IP = System.Net.IPAddress.Parse(parts[0]);
 
-		long mask = (long)Math.Pow(2, Int32.Parse(parts[1]));
-		Netmask = new System.Net.IPAddress(mask-1);
+		//Преобразование кол-ва бит в массив байт адреса с нужным числом бит
+		byte[] mask = new byte[4];
+		int one = 128;
+		for (int i = 0; i< int.Parse(parts[1]); i++)
+		{
+			int index = i / 8;
+			mask[index] |= (byte)one;
+			one >>= 1;
+			if (one == 0)
+				one = 128;
+		}
+
+		//Netmask = System.Net.IPAddress.Parse("255.255.255.128");
+		Netmask = new System.Net.IPAddress(mask);
 		string test = Netmask.ToString();
 	}
 
@@ -79,6 +91,8 @@ public class IPAdress
 	/// <returns></returns>
 	public static bool IsInSameSubnet(System.Net.IPAddress a, System.Net.IPAddress b, System.Net.IPAddress netmask)
 	{
+		System.Net.IPAddress aa = GetNetworkAdress(a, netmask);
+		System.Net.IPAddress bb = GetNetworkAdress(b, netmask);
 		return GetNetworkAdress(a, netmask).Equals(GetNetworkAdress(b, netmask));
 	}
 

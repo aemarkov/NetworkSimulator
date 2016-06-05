@@ -22,15 +22,15 @@ namespace NetworkSim
 		{
 			//hub1.Name = "hub1";
 
-			pc1.SetIP("192.168.1.140/25");
-			pc2.SetIP("192.168.1.2/24");
-			pc3.SetIP("192.168.1.3/24");
+			pc1.SetIP("192.168.1.1/25");
+			pc2.SetIP("192.168.1.2/25");
+			pc3.SetIP("192.168.1.130/25");
 
 			pc1.DuplexConnect(0, 0, hub1);
 			hub1.DuplexConnect(1, 0, pc2);
 			hub1.DuplexConnect(2, 0, pc3);
 
-			pc1.SendPackage(new NetworkComponents.Package("192.168.1.130"));
+			pc1.SendPackage(new NetworkComponents.Package("192.168.1.2"));
 		}
 	}
 }

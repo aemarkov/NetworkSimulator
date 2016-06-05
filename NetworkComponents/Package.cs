@@ -24,17 +24,17 @@ namespace NetworkComponents
 		}
 
 		public System.Net.IPAddress StartIP { get; set; }
-		public System.Net.IPAddress EndIP { get; set; }
+		public Stack<System.Net.IPAddress> EndIP { get; set; }
 		public State PackageState { get; set; }
 
 
-		public List<AbstractNetworkDevice> Trace { get; }
+		public List<String> Trace { get; }
 
 		
 
 		public Package()
 		{
-			Trace = new List<AbstractNetworkDevice>();
+			Trace = new List<string>();
 			PackageState = State.SENDING;
 		}
 
@@ -44,21 +44,24 @@ namespace NetworkComponents
 		/// <param name="end_ip"></param>
 		public Package(string end_ip):this()
 		{
-			EndIP = System.Net.IPAddress.Parse(end_ip);
+			EndIP = new Stack<System.Net.IPAddress>();
+			EndIP.Push(System.Net.IPAddress.Parse(end_ip));
 		}
+
+		/// ОТСЛЕЖИВАНИЕ ПУТИ
 
 		/// <summary>
 		/// Добавляет очередное устройство в машруте
 		/// </summary>
 		/// <param name="device"></param>
-		public void AddStage(AbstractNetworkDevice device)
+		public void AddStage(String device)
 		{
 			Trace.Add(device);
 		}
 
 		public override String ToString()
 		{
-			return "[" + StartIP + "; " + EndIP + "]";
+			return "[" + StartIP + "; " + EndIP.Peek() + "]";
 		}
 	}
 }
