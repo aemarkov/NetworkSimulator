@@ -82,10 +82,12 @@ namespace NetworkComponents.Controls
 				package.EndIP.Pop();
 				if (package.EndIP.Count == 0)
 				{				
-					stage = Name + " (" + InterfaceAdresses[port] + ") received package from " + package.StartIP;
+					stage = Name + " (" + InterfaceAdresses[port] + ") received package "+package+"from " + package.StartIP;
 					Logger.WriteLine(stage);
 					package.AddStage(stage);
 					package.PackageState = Package.State.RECEIVED;
+					package.EndIP.Push(InterfaceAdresses[port].IP);
+					PackageManager.AddPackage(package);
 					return;
 				}
 
@@ -98,6 +100,7 @@ namespace NetworkComponents.Controls
 					Logger.WriteLine(stage);
 					package.AddStage(stage);
 					package.PackageState = Package.State.DENIED;
+					PackageManager.AddPackage(package);
 					return;
 				}
 
@@ -110,6 +113,7 @@ namespace NetworkComponents.Controls
 					Logger.WriteLine(stage);
 					package.AddStage(stage);
 					package.PackageState = Package.State.NO_ROUTE;
+					PackageManager.AddPackage(package);
 				}
 
 				if (route.NextRouter != null)
@@ -125,6 +129,7 @@ namespace NetworkComponents.Controls
 
 				Logger.WriteLine(stage);
 				package.AddStage(stage);
+				PackageManager.AddPackage(package);
 			}
 		}
 

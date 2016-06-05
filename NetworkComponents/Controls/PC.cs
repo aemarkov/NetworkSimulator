@@ -35,15 +35,7 @@ namespace NetworkComponents.Controls
 			InitializeComponent();
 		}
 
-		/// <summary>
-		/// Устанавливает адреса интерфейсов
-		/// </summary>
-		/// <param name="ips">IP-адрес</param>
-		public override void SetIP(params String[] ips)
-		{
-			base.SetIP(ips);
-			lblIP.Text = InterfaceAdresses[0].ToString();
-		}
+
 
 		/*
 		 * Если адрес получителя совпадает - то принимаем пакет, 

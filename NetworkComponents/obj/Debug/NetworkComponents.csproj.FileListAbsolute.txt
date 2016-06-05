@@ -6,3 +6,4 @@ D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.d
 D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.pdb
 D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.PC.resources
 D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.NetDrawer.resources
+D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.Gate.resources

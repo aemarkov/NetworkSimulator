@@ -48,6 +48,7 @@ namespace NetworkSim
 			pc4.SetIP("192.168.1.132/25");
 			pc4.SetGateway("192.168.1.130");
 
+			gate1.SetIP("192.168.132/25");
 
 			pc1.DuplexConnect(0, 0, hub1);
 			pc2.DuplexConnect(0, 1, hub1);
@@ -56,6 +57,7 @@ namespace NetworkSim
 			server1.DuplexConnect(1, 2, hub2);
 			hub2.DuplexConnect(0, 0, pc3);
 			hub2.DuplexConnect(1, 0, pc4);
+			hub2.DuplexConnect(3, 0, gate1);
 
 
 			netDrawer1.Init();

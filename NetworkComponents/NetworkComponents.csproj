@@ -48,6 +48,12 @@
     <Compile Include="Controls\AbstractNetworkDevice.Designer.cs">
       <DependentUpon>AbstractNetworkDevice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Gate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Gate.Designer.cs">
+      <DependentUpon>Gate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Hub.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -85,6 +91,9 @@
     <EmbeddedResource Include="Controls\AbstractNetworkDevice.resx">
       <DependentUpon>AbstractNetworkDevice.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Gate.resx">
+      <DependentUpon>Gate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\NetDrawer.resx">
       <DependentUpon>NetDrawer.cs</DependentUpon>

@@ -39,13 +39,14 @@
 			this.column_package = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.column_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.netDrawer1 = new NetworkComponents.Controls.NetDrawer();
-			this.hub2 = new NetworkComponents.Controls.Hub();
-			this.server1 = new NetworkComponents.Controls.Server();
-			this.hub1 = new NetworkComponents.Controls.Hub();
-			this.pc1 = new NetworkComponents.Controls.PC();
-			this.pc2 = new NetworkComponents.Controls.PC();
-			this.pc3 = new NetworkComponents.Controls.PC();
 			this.pc4 = new NetworkComponents.Controls.PC();
+			this.pc3 = new NetworkComponents.Controls.PC();
+			this.pc2 = new NetworkComponents.Controls.PC();
+			this.pc1 = new NetworkComponents.Controls.PC();
+			this.server1 = new NetworkComponents.Controls.Server();
+			this.hub2 = new NetworkComponents.Controls.Hub();
+			this.hub1 = new NetworkComponents.Controls.Hub();
+			this.gate1 = new NetworkComponents.Controls.Gate();
 			((System.ComponentModel.ISupportInitialize)(this.table_packages)).BeginInit();
 			this.netDrawer1.SuspendLayout();
 			this.SuspendLayout();
@@ -141,17 +142,68 @@
 			// netDrawer1
 			// 
 			this.netDrawer1.BackColor = System.Drawing.Color.White;
+			this.netDrawer1.Controls.Add(this.gate1);
 			this.netDrawer1.Controls.Add(this.pc4);
 			this.netDrawer1.Controls.Add(this.pc3);
 			this.netDrawer1.Controls.Add(this.pc2);
 			this.netDrawer1.Controls.Add(this.pc1);
-			this.netDrawer1.Controls.Add(this.hub2);
 			this.netDrawer1.Controls.Add(this.server1);
+			this.netDrawer1.Controls.Add(this.hub2);
 			this.netDrawer1.Controls.Add(this.hub1);
 			this.netDrawer1.Location = new System.Drawing.Point(12, 12);
 			this.netDrawer1.Name = "netDrawer1";
 			this.netDrawer1.Size = new System.Drawing.Size(839, 486);
 			this.netDrawer1.TabIndex = 0;
+			// 
+			// pc4
+			// 
+			this.pc4.BackColor = System.Drawing.Color.Silver;
+			this.pc4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pc4.Gateway = null;
+			this.pc4.Location = new System.Drawing.Point(674, 260);
+			this.pc4.Name = "pc4";
+			this.pc4.Size = new System.Drawing.Size(130, 140);
+			this.pc4.TabIndex = 16;
+			// 
+			// pc3
+			// 
+			this.pc3.BackColor = System.Drawing.Color.Silver;
+			this.pc3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pc3.Gateway = null;
+			this.pc3.Location = new System.Drawing.Point(674, 32);
+			this.pc3.Name = "pc3";
+			this.pc3.Size = new System.Drawing.Size(130, 140);
+			this.pc3.TabIndex = 15;
+			// 
+			// pc2
+			// 
+			this.pc2.BackColor = System.Drawing.Color.Silver;
+			this.pc2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pc2.Gateway = null;
+			this.pc2.Location = new System.Drawing.Point(23, 260);
+			this.pc2.Name = "pc2";
+			this.pc2.Size = new System.Drawing.Size(130, 140);
+			this.pc2.TabIndex = 14;
+			// 
+			// pc1
+			// 
+			this.pc1.BackColor = System.Drawing.Color.Silver;
+			this.pc1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pc1.Gateway = null;
+			this.pc1.Location = new System.Drawing.Point(23, 32);
+			this.pc1.Name = "pc1";
+			this.pc1.Size = new System.Drawing.Size(130, 140);
+			this.pc1.TabIndex = 13;
+			// 
+			// server1
+			// 
+			this.server1.BackColor = System.Drawing.Color.Silver;
+			this.server1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.server1.InterfacesCount_U = 2;
+			this.server1.Location = new System.Drawing.Point(334, 32);
+			this.server1.Name = "server1";
+			this.server1.Size = new System.Drawing.Size(130, 120);
+			this.server1.TabIndex = 12;
 			// 
 			// hub2
 			// 
@@ -163,16 +215,6 @@
 			this.hub2.Size = new System.Drawing.Size(100, 100);
 			this.hub2.TabIndex = 4;
 			// 
-			// server1
-			// 
-			this.server1.BackColor = System.Drawing.Color.Silver;
-			this.server1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.server1.InterfacesCount_U = 2;
-			this.server1.Location = new System.Drawing.Point(352, 32);
-			this.server1.Name = "server1";
-			this.server1.Size = new System.Drawing.Size(100, 100);
-			this.server1.TabIndex = 3;
-			// 
 			// hub1
 			// 
 			this.hub1.BackColor = System.Drawing.Color.Silver;
@@ -183,45 +225,14 @@
 			this.hub1.Size = new System.Drawing.Size(100, 100);
 			this.hub1.TabIndex = 2;
 			// 
-			// pc1
+			// gate1
 			// 
-			this.pc1.BackColor = System.Drawing.Color.Silver;
-			this.pc1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pc1.Gateway = null;
-			this.pc1.Location = new System.Drawing.Point(23, 32);
-			this.pc1.Name = "pc1";
-			this.pc1.Size = new System.Drawing.Size(115, 147);
-			this.pc1.TabIndex = 5;
-			// 
-			// pc2
-			// 
-			this.pc2.BackColor = System.Drawing.Color.Silver;
-			this.pc2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pc2.Gateway = null;
-			this.pc2.Location = new System.Drawing.Point(23, 220);
-			this.pc2.Name = "pc2";
-			this.pc2.Size = new System.Drawing.Size(115, 147);
-			this.pc2.TabIndex = 6;
-			// 
-			// pc3
-			// 
-			this.pc3.BackColor = System.Drawing.Color.Silver;
-			this.pc3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pc3.Gateway = null;
-			this.pc3.Location = new System.Drawing.Point(688, 32);
-			this.pc3.Name = "pc3";
-			this.pc3.Size = new System.Drawing.Size(115, 147);
-			this.pc3.TabIndex = 7;
-			// 
-			// pc4
-			// 
-			this.pc4.BackColor = System.Drawing.Color.Silver;
-			this.pc4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pc4.Gateway = null;
-			this.pc4.Location = new System.Drawing.Point(688, 220);
-			this.pc4.Name = "pc4";
-			this.pc4.Size = new System.Drawing.Size(115, 147);
-			this.pc4.TabIndex = 8;
+			this.gate1.BackColor = System.Drawing.Color.Silver;
+			this.gate1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.gate1.Location = new System.Drawing.Point(334, 335);
+			this.gate1.Name = "gate1";
+			this.gate1.Size = new System.Drawing.Size(130, 118);
+			this.gate1.TabIndex = 17;
 			// 
 			// Form1
 			// 
@@ -249,7 +260,6 @@
 
 		private NetworkComponents.Controls.NetDrawer netDrawer1;
 		private NetworkComponents.Controls.Hub hub2;
-		private NetworkComponents.Controls.Server server1;
 		private NetworkComponents.Controls.Hub hub1;
 		private System.Windows.Forms.TextBox txtLog;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
@@ -260,10 +270,12 @@
 		private System.Windows.Forms.DataGridView table_packages;
 		private System.Windows.Forms.DataGridViewTextBoxColumn column_package;
 		private System.Windows.Forms.DataGridViewTextBoxColumn column_status;
+		private NetworkComponents.Controls.Server server1;
+		private NetworkComponents.Controls.PC pc1;
 		private NetworkComponents.Controls.PC pc4;
 		private NetworkComponents.Controls.PC pc3;
 		private NetworkComponents.Controls.PC pc2;
-		private NetworkComponents.Controls.PC pc1;
+		private NetworkComponents.Controls.Gate gate1;
 	}
 }
 

@@ -54,14 +54,14 @@ namespace NetworkComponents.Controls
 		{
 			InitializeComponent();
 			ConnectedDevices = new Dictionary<int, AbstractNetworkDevice>();
-			
-			//Пишем номера портов на форме
+
 			StringBuilder builder = new StringBuilder();
+
+			//Пишем номера портов на форме
 			for (int i = 0; i < InterfacesCount; i++)
 				builder.Append(i).Append(" ");
 
 			lblPorts.Text = builder.ToString();
-
 
 			this.MouseDown += AbstractNetworkDevice_MouseDown;
 			this.MouseUp += AbstractNetworkDevice_MouseUp;
@@ -80,6 +80,7 @@ namespace NetworkComponents.Controls
 				throw new ArgumentException("Invalid number of IP adresses");
 
 			InterfaceAdresses = ips;
+			display_interfaces();
 		}
 
 		public virtual void SetIP(params String[] ips)
@@ -90,6 +91,28 @@ namespace NetworkComponents.Controls
 			InterfaceAdresses = new IPAddressWithMask[InterfacesCount];
 			for (int i = 0; i < ips.Length; i++)
 				InterfaceAdresses[i] = new IPAddressWithMask(ips[i]);
+
+			display_interfaces();
+		}
+
+		private void display_interfaces()
+		{
+			StringBuilder builder = new StringBuilder();
+
+			if (InterfaceAdresses == null)
+			{
+				//Пишем номера портов на форме
+				for (int i = 0; i < InterfacesCount; i++)
+					builder.Append(i).Append(" ");
+			}
+			else
+			{
+				//Пишем порты и адреса на форме:
+				for (int i = 0; i < InterfacesCount; i++)
+					builder.Append(i).Append(": ").Append(InterfaceAdresses[i]).Append(Environment.NewLine);
+			}
+
+			lblPorts.Text = builder.ToString();
 		}
 
 		/// <summary>
