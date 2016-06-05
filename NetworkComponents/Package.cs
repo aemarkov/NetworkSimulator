@@ -10,8 +10,13 @@ namespace NetworkComponents
 	/// <summary>
 	/// Сетевой пакет
 	/// </summary>
-	public class Package
+	public class Package : ICloneable
 	{
+		/// <summary>
+		/// ID, для идентификации
+		/// </summary>
+		public int ID { get; set; }
+
 		/// <summary>
 		/// Состояние пакета
 		/// </summary>
@@ -29,7 +34,7 @@ namespace NetworkComponents
 		public State PackageState { get; set; }
 
 
-		public List<String> Trace { get; }
+		public List<String> Trace { get; private set; }
 
 		
 
@@ -60,9 +65,21 @@ namespace NetworkComponents
 			Trace.Add(device);
 		}
 
+		//Возвращает строкове представление пакета
 		public override String ToString()
 		{
-			return "[" + StartIP + "; " + EndIP.Peek() + "]";
+			return "[#"+ID+"; "+ StartIP + "; " + EndIP.Peek() + "]";
+		}
+
+		//Создание копии
+		public object Clone()
+		{
+			Package copy = new Package();
+			copy.PackageState = PackageState;
+			copy.StartIP = StartIP;
+			copy.EndIP = EndIP;
+			copy.Trace = Trace.Select(x => x).ToList();
+			return copy;
 		}
 	}
 }

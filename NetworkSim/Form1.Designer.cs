@@ -28,6 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
+			this.txtLog = new System.Windows.Forms.TextBox();
+			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.listBoxPackages = new System.Windows.Forms.ListBox();
+			this.btnReset = new System.Windows.Forms.Button();
+			this.trace_details = new System.Windows.Forms.ListBox();
 			this.netDrawer1 = new NetworkComponents.Controls.NetDrawer();
 			this.pc4 = new NetworkComponents.Controls.PC();
 			this.pc3 = new NetworkComponents.Controls.PC();
@@ -36,9 +42,52 @@
 			this.hub1 = new NetworkComponents.Controls.Hub();
 			this.pc2 = new NetworkComponents.Controls.PC();
 			this.pc1 = new NetworkComponents.Controls.PC();
-			this.button1 = new System.Windows.Forms.Button();
+			this.label1 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
 			this.netDrawer1.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// txtLog
+			// 
+			this.txtLog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.txtLog.Location = new System.Drawing.Point(13, 505);
+			this.txtLog.Multiline = true;
+			this.txtLog.Name = "txtLog";
+			this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+			this.txtLog.Size = new System.Drawing.Size(837, 183);
+			this.txtLog.TabIndex = 1;
+			// 
+			// contextMenuStrip1
+			// 
+			this.contextMenuStrip1.Name = "contextMenuStrip1";
+			this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+			// 
+			// listBoxPackages
+			// 
+			this.listBoxPackages.FormattingEnabled = true;
+			this.listBoxPackages.Location = new System.Drawing.Point(857, 38);
+			this.listBoxPackages.Name = "listBoxPackages";
+			this.listBoxPackages.Size = new System.Drawing.Size(177, 615);
+			this.listBoxPackages.TabIndex = 2;
+			this.listBoxPackages.SelectedIndexChanged += new System.EventHandler(this.listBoxPackages_SelectedIndexChanged);
+			// 
+			// btnReset
+			// 
+			this.btnReset.Location = new System.Drawing.Point(857, 665);
+			this.btnReset.Name = "btnReset";
+			this.btnReset.Size = new System.Drawing.Size(177, 23);
+			this.btnReset.TabIndex = 3;
+			this.btnReset.Text = "Reset";
+			this.btnReset.UseVisualStyleBackColor = true;
+			this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+			// 
+			// trace_details
+			// 
+			this.trace_details.FormattingEnabled = true;
+			this.trace_details.Location = new System.Drawing.Point(1041, 39);
+			this.trace_details.Name = "trace_details";
+			this.trace_details.Size = new System.Drawing.Size(417, 615);
+			this.trace_details.TabIndex = 4;
 			// 
 			// netDrawer1
 			// 
@@ -125,28 +174,42 @@
 			this.pc1.Size = new System.Drawing.Size(100, 100);
 			this.pc1.TabIndex = 0;
 			// 
-			// button1
+			// label1
 			// 
-			this.button1.Location = new System.Drawing.Point(60, 505);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 1;
-			this.button1.Text = "button1";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(857, 13);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(46, 13);
+			this.label1.TabIndex = 5;
+			this.label1.Text = "Пакеты";
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(1038, 13);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(90, 13);
+			this.label2.TabIndex = 6;
+			this.label2.Text = "Маршрут пакета";
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(873, 529);
-			this.Controls.Add(this.button1);
+			this.ClientSize = new System.Drawing.Size(1470, 700);
+			this.Controls.Add(this.label2);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.trace_details);
+			this.Controls.Add(this.btnReset);
+			this.Controls.Add(this.listBoxPackages);
+			this.Controls.Add(this.txtLog);
 			this.Controls.Add(this.netDrawer1);
 			this.Name = "Form1";
 			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.netDrawer1.ResumeLayout(false);
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
         }
 
@@ -160,7 +223,13 @@
 		private NetworkComponents.Controls.Hub hub1;
 		private NetworkComponents.Controls.PC pc2;
 		private NetworkComponents.Controls.PC pc1;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.TextBox txtLog;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+		private System.Windows.Forms.ListBox listBoxPackages;
+		private System.Windows.Forms.Button btnReset;
+		private System.Windows.Forms.ListBox trace_details;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label label2;
 	}
 }
 

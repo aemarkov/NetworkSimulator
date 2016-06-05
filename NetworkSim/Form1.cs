@@ -1,4 +1,5 @@
-﻿using NetworkComponents.Controls;
+﻿using NetworkComponents;
+using NetworkComponents.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,9 +21,10 @@ namespace NetworkSim
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			//hub1.Name = "hub1";
+			Logger.TextWrited += Logger_TextWrited;
+			PackageManager.NewPackage += PackageManager_NewPackage;
 
-		 server1.SetIP("192.168.1.1/25", "192.168.1.130/25");
+			server1.SetIP("192.168.1.1/25", "192.168.1.130/25");
 			server1.SetProxy(
 				@"192.168.1.2;192.168.1.131;pass
 				  192.168.1.131;192.168.1.2;pass
@@ -60,6 +62,41 @@ namespace NetworkSim
 
 			
 			pc1.SendPackage(new NetworkComponents.Package("192.168.1.131"));
+		}
+
+		//Новый пакет сгенерирован
+		private void PackageManager_NewPackage(Package obj)
+		{
+			listBoxPackages.Items.Add(obj);
+		}
+
+		//Новое сообщение в лог
+		private void Logger_TextWrited(string obj)
+		{
+			txtLog.Text += obj;
+		}
+
+		//Удаление всех пакетов из мониторинга
+		private void btnReset_Click(object sender, EventArgs e)
+		{
+			PackageManager.Reset();
+		}
+
+		private void listBoxPackages_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if(listBoxPackages.SelectedIndex!=-1)
+			{
+				var package = (Package)listBoxPackages.Items[listBoxPackages.SelectedIndex];
+
+				trace_details.Items.Clear();
+				foreach(var stage in package.Trace)
+				{
+					trace_details.Items.Add(stage);
+				}
+
+				trace_details.Items.Add("STATUS: " + package.PackageState);
+
+			}
 		}
 	}
 }

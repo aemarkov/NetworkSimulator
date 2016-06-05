@@ -83,7 +83,7 @@ namespace NetworkComponents.Controls
 				if (package.EndIP.Count == 0)
 				{				
 					stage = Name + " (" + InterfaceAdresses[port] + ") received package from " + package.StartIP;
-					Debug.WriteLine(stage);
+					Logger.WriteLine(stage);
 					package.AddStage(stage);
 					package.PackageState = Package.State.RECEIVED;
 					return;
@@ -95,7 +95,7 @@ namespace NetworkComponents.Controls
 				if(!ispass)
 				{
 					stage = Name + " (" + InterfaceAdresses[port] + ") DENIED package " + package;
-					Debug.WriteLine(stage);
+					Logger.WriteLine(stage);
 					package.AddStage(stage);
 					package.PackageState = Package.State.DENIED;
 					return;
@@ -107,7 +107,7 @@ namespace NetworkComponents.Controls
 				if(route==null)
 				{
 					stage = Name + " (" + InterfaceAdresses[port] + ") DON'T find route for package " + package;
-					Debug.WriteLine(stage);
+					Logger.WriteLine(stage);
 					package.AddStage(stage);
 					package.PackageState = Package.State.NO_ROUTE;
 				}
@@ -123,7 +123,7 @@ namespace NetworkComponents.Controls
 				package.PackageState = Package.State.REJECTED;
 				stage = Name + " (" + InterfaceAdresses[0] + ") rejected package " + package;
 
-				Debug.WriteLine(stage);
+				Logger.WriteLine(stage);
 				package.AddStage(stage);
 			}
 		}

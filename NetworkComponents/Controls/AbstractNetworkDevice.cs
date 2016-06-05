@@ -149,15 +149,16 @@ namespace NetworkComponents.Controls
 			if (!ConnectedDevices.ContainsKey(port))
 				throw new ArgumentException("Device to this port not connected");
 
+			PackageManager.AddPackage(package);
+
 			String stage;
 			if (InterfaceAdresses!=null)
-				stage = TraceToString(Name, InterfaceAdresses[port], port, ConnectedDevices[port].Name, package.StartIP, package.EndIP.Peek());
+				stage = TraceToString(Name, InterfaceAdresses[port], port, ConnectedDevices[port].Name, package);
 			else
-				stage = TraceToString(Name, null, port, ConnectedDevices[port].Name, package.StartIP, package.EndIP.Peek());
+				stage = TraceToString(Name, null, port, ConnectedDevices[port].Name, package);
 
-			Debug.WriteLine(stage);
+			Logger.WriteLine(stage);
 			package.AddStage(stage);
-			PackageManager.AddPackage(package);
 
 			//Проверяем, находится ли получатель в той же подсети
 			//if (InterfaceAdresses!=null && !InterfaceAdresses[port].IsInSameSubnet(package.EndIP.Peek()))
@@ -167,7 +168,7 @@ namespace NetworkComponents.Controls
 		}
 
 		//Переводит состояние трассировки в строку
-		public static string TraceToString(string sender_name, IPAddressWithMask sender_ip, int sender_port, string receiver_name, System.Net.IPAddress start_ip, System.Net.IPAddress end_ip)
+		public static string TraceToString(string sender_name, IPAddressWithMask sender_ip, int sender_port, string receiver_name, Package package)
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.Append(sender_name).Append(" (");
@@ -177,7 +178,7 @@ namespace NetworkComponents.Controls
 
 			sb.Append(":").Append(sender_port).Append(") ")
 				.Append("sent packet ")
-				.Append("[").Append(start_ip).Append("; ").Append(end_ip).Append("] ")
+				.Append(package)
 				.Append(" to ")
 				.Append(receiver_name);
 

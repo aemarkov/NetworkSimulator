@@ -45,7 +45,7 @@ namespace NetworkComponents.Controls
 			if (package.EndIP.Peek().Equals(InterfaceAdresses[0].IP))
 			{
 				package.PackageState = Package.State.RECEIVED;
-				stage = Name + " ("+InterfaceAdresses[0]+") received package from " + package.StartIP;
+				stage = Name + " ("+InterfaceAdresses[0]+") received package "+package+" from " + package.StartIP;
 			}
 			else
 			{
@@ -53,7 +53,7 @@ namespace NetworkComponents.Controls
 				stage = Name + " ("+InterfaceAdresses[0]+") rejected package "+package;
 			}
 
-			Debug.WriteLine(stage);
+			Logger.WriteLine(stage);
 			package.AddStage(stage);
 		}
 
@@ -76,7 +76,7 @@ namespace NetworkComponents.Controls
 			}
 			else
 			{
-				Debug.Write(Name + " (" + InterfaceAdresses[0] + ") DIDN'T send package " + package + " to " + ConnectedDevices[0].Name + ": OTHER SUBNET"); 
+				Logger.WriteLine(Name + " (" + InterfaceAdresses[0] + ") DIDN'T send package " + package + " to " + ConnectedDevices[0].Name + ": OTHER SUBNET"); 
 			}
 		}
 	}

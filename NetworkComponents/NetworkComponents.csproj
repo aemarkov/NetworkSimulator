@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="Exceptions.cs" />
     <Compile Include="IPAddressWithMask.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="PackageManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

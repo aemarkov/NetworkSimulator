@@ -25,10 +25,15 @@ namespace NetworkComponents.Controls
 		 */
 		public override void ProcessPackage(Package package, AbstractNetworkDevice sender)
 		{
+			int i = 0;
 			foreach(var device in ConnectedDevices)
 			{
 				if (!device.Value.Equals(sender))
-					send(device.Key, package);
+				{
+					Package pckg = i == (ConnectedDevices.Count-2) ? package : (Package)package.Clone();
+					i++;
+					send(device.Key, pckg);
+				}
 			}
 		}
 	}
