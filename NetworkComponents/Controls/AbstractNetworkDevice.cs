@@ -15,10 +15,9 @@ namespace NetworkComponents.Controls
 	/// <summary>
 	/// Абстрактный класс сетевого устройства
 	/// </summary>
-	public  partial class AbstractNetworkDevice : UserControl
+	public partial class AbstractNetworkDevice : UserControl, IMovable
 	{
-		public event Action<Point, AbstractNetworkDevice> DeviceMove;
-
+		public Mover Mover { get; private set; }
 
 		/// <summary>
 		/// Колисчество интерфейсов
@@ -63,10 +62,7 @@ namespace NetworkComponents.Controls
 
 			lblPorts.Text = builder.ToString();
 
-			this.MouseDown += AbstractNetworkDevice_MouseDown;
-			this.MouseUp += AbstractNetworkDevice_MouseUp;
-			this.MouseMove += AbstractNetworkDevice_MouseMove;
-			this.MouseLeave += AbstractNetworkDevice_MouseLeave;
+			Mover = new Mover(this);
 		}
 
 		
@@ -213,43 +209,7 @@ namespace NetworkComponents.Controls
 		/// ГРАФОН
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 
-		//Перетаскивание
-		private Point previous_point;
-		private bool is_drag = false;
-
-		private void AbstractNetworkDevice_MouseLeave(object sender, EventArgs e)
-		{
-			is_drag = false;
-		}
-
-		private void AbstractNetworkDevice_MouseMove(object sender, MouseEventArgs e)
-		{
-			if (is_drag)
-			{
-				int delta_x = e.X - previous_point.X;
-				int delta_y = e.Y - previous_point.Y;
-
-				Left += delta_x;
-				Top += delta_y;
-
-				if(DeviceMove!=null)
-					DeviceMove(new Point(Left,Top), this);
-			}
-		}
-
-		private void AbstractNetworkDevice_MouseUp(object sender, MouseEventArgs e)
-		{
-			is_drag = false;
-		}
-
-		private void AbstractNetworkDevice_MouseDown(object sender, MouseEventArgs e)
-		{
-			if (e.Button == MouseButtons.Left)
-			{
-				previous_point = e.Location;
-				is_drag = true;
-			}
-		}
+		
 
 
 	}

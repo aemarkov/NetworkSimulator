@@ -7,3 +7,5 @@ D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.p
 D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.PC.resources
 D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.NetDrawer.resources
 D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.Gate.resources
+D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.PCGroup.resources
+D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.csprojResolveAssemblyReference.cache

@@ -60,6 +60,8 @@
     <Compile Include="Controls\Hub.Designer.cs">
       <DependentUpon>Hub.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\IMovable.cs" />
+    <Compile Include="Controls\Mover.cs" />
     <Compile Include="Controls\NetDrawer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -72,6 +74,12 @@
     <Compile Include="Controls\PC.Designer.cs">
       <DependentUpon>PC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PCGroup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PCGroup.Designer.cs">
+      <DependentUpon>PCGroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Server.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -79,6 +87,7 @@
       <DependentUpon>Server.cs</DependentUpon>
     </Compile>
     <Compile Include="Exceptions.cs" />
+    <Compile Include="IPAddressTools.cs" />
     <Compile Include="IPAddressWithMask.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Package.cs" />
@@ -100,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PC.resx">
       <DependentUpon>PC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PCGroup.resx">
+      <DependentUpon>PCGroup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

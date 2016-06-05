@@ -39,14 +39,13 @@
 			this.column_package = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.column_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.netDrawer1 = new NetworkComponents.Controls.NetDrawer();
+			this.pcGroup1 = new NetworkComponents.Controls.PCGroup();
+			this.gate1 = new NetworkComponents.Controls.Gate();
 			this.pc4 = new NetworkComponents.Controls.PC();
 			this.pc3 = new NetworkComponents.Controls.PC();
-			this.pc2 = new NetworkComponents.Controls.PC();
-			this.pc1 = new NetworkComponents.Controls.PC();
 			this.server1 = new NetworkComponents.Controls.Server();
 			this.hub2 = new NetworkComponents.Controls.Hub();
 			this.hub1 = new NetworkComponents.Controls.Hub();
-			this.gate1 = new NetworkComponents.Controls.Gate();
 			((System.ComponentModel.ISupportInitialize)(this.table_packages)).BeginInit();
 			this.netDrawer1.SuspendLayout();
 			this.SuspendLayout();
@@ -142,11 +141,10 @@
 			// netDrawer1
 			// 
 			this.netDrawer1.BackColor = System.Drawing.Color.White;
+			this.netDrawer1.Controls.Add(this.pcGroup1);
 			this.netDrawer1.Controls.Add(this.gate1);
 			this.netDrawer1.Controls.Add(this.pc4);
 			this.netDrawer1.Controls.Add(this.pc3);
-			this.netDrawer1.Controls.Add(this.pc2);
-			this.netDrawer1.Controls.Add(this.pc1);
 			this.netDrawer1.Controls.Add(this.server1);
 			this.netDrawer1.Controls.Add(this.hub2);
 			this.netDrawer1.Controls.Add(this.hub1);
@@ -154,6 +152,24 @@
 			this.netDrawer1.Name = "netDrawer1";
 			this.netDrawer1.Size = new System.Drawing.Size(839, 486);
 			this.netDrawer1.TabIndex = 0;
+			// 
+			// pcGroup1
+			// 
+			this.pcGroup1.BackColor = System.Drawing.SystemColors.ControlDark;
+			this.pcGroup1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pcGroup1.Location = new System.Drawing.Point(20, 150);
+			this.pcGroup1.Name = "pcGroup1";
+			this.pcGroup1.Size = new System.Drawing.Size(130, 167);
+			this.pcGroup1.TabIndex = 18;
+			// 
+			// gate1
+			// 
+			this.gate1.BackColor = System.Drawing.Color.Silver;
+			this.gate1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.gate1.Location = new System.Drawing.Point(503, 318);
+			this.gate1.Name = "gate1";
+			this.gate1.Size = new System.Drawing.Size(130, 118);
+			this.gate1.TabIndex = 17;
 			// 
 			// pc4
 			// 
@@ -174,26 +190,6 @@
 			this.pc3.Name = "pc3";
 			this.pc3.Size = new System.Drawing.Size(130, 140);
 			this.pc3.TabIndex = 15;
-			// 
-			// pc2
-			// 
-			this.pc2.BackColor = System.Drawing.Color.Silver;
-			this.pc2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pc2.Gateway = null;
-			this.pc2.Location = new System.Drawing.Point(23, 260);
-			this.pc2.Name = "pc2";
-			this.pc2.Size = new System.Drawing.Size(130, 140);
-			this.pc2.TabIndex = 14;
-			// 
-			// pc1
-			// 
-			this.pc1.BackColor = System.Drawing.Color.Silver;
-			this.pc1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pc1.Gateway = null;
-			this.pc1.Location = new System.Drawing.Point(23, 32);
-			this.pc1.Name = "pc1";
-			this.pc1.Size = new System.Drawing.Size(130, 140);
-			this.pc1.TabIndex = 13;
 			// 
 			// server1
 			// 
@@ -224,15 +220,6 @@
 			this.hub1.Name = "hub1";
 			this.hub1.Size = new System.Drawing.Size(100, 100);
 			this.hub1.TabIndex = 2;
-			// 
-			// gate1
-			// 
-			this.gate1.BackColor = System.Drawing.Color.Silver;
-			this.gate1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.gate1.Location = new System.Drawing.Point(334, 335);
-			this.gate1.Name = "gate1";
-			this.gate1.Size = new System.Drawing.Size(130, 118);
-			this.gate1.TabIndex = 17;
 			// 
 			// Form1
 			// 
@@ -271,11 +258,10 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn column_package;
 		private System.Windows.Forms.DataGridViewTextBoxColumn column_status;
 		private NetworkComponents.Controls.Server server1;
-		private NetworkComponents.Controls.PC pc1;
 		private NetworkComponents.Controls.PC pc4;
 		private NetworkComponents.Controls.PC pc3;
-		private NetworkComponents.Controls.PC pc2;
 		private NetworkComponents.Controls.Gate gate1;
+		private NetworkComponents.Controls.PCGroup pcGroup1;
 	}
 }
 

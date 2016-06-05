@@ -16,24 +16,27 @@ namespace NetworkComponents.Controls
 	/// </summary>
 	public partial class NetDrawer : Panel
 	{
-		private Dictionary<AbstractNetworkDevice, List<AbstractNetworkDevice>> connections;
+		private Dictionary<UserControl, List<UserControl>> connections;
 
 		public NetDrawer()
 		{
 			InitializeComponent();
-			connections = new Dictionary<AbstractNetworkDevice, List<AbstractNetworkDevice>>();
+			connections = new Dictionary<UserControl, List<UserControl>>();
 		}
 
 		public void Init()
 		{
 			foreach (var control in Controls)
 			{
-				var device = (AbstractNetworkDevice)control;
-				device.DeviceMove += Device_DeviceMove; ;
+				if (control is IMovable)
+				{
+					var device = (IMovable)control;
+					device.Mover.DeviceMove += Device_DeviceMove; ;
+				}
 			}
 		}
 
-		private void Device_DeviceMove(Point arg1, AbstractNetworkDevice arg2)
+		private void Device_DeviceMove(Point arg1, UserControl arg2)
 		{
 			Invalidate();
 		}
@@ -60,17 +63,35 @@ namespace NetworkComponents.Controls
 
 			foreach (var control in Controls)
 			{
-				var device = (AbstractNetworkDevice)control;
-				var connections = device.Connections;
-				var list = new List<AbstractNetworkDevice>();
+				if (control is AbstractNetworkDevice)
+					//Просто устрйоство
+					make_connections((AbstractNetworkDevice)control);
+				else if(control is PCGroup)
+				{
+					//Группа пекарен
+					var group = (PCGroup)control;
+					/*foreach (var pc in group.pcs)
+						make_connections(pc);*/
 
-				foreach (var connection in connections)
-					list.Add(connection.Value);
-
-				this.connections.Add(device, list);
+					var connected = group.pcs.First().Connections.First().Value;
+					connections.Add(group, new List<UserControl>() {connected});
+				}
+				
 			}
 		}
 
+		private void make_connections(AbstractNetworkDevice device)
+		{
+			var connections = device.Connections;
+			var list = new List<UserControl>();
+
+			foreach (var connection in connections)
+				list.Add(connection.Value);
+
+			this.connections.Add(device, list);
+		}
+
+		//Рисует
 		protected override void OnPaint(PaintEventArgs e)
 		{
 
@@ -82,6 +103,9 @@ namespace NetworkComponents.Controls
 
 				foreach(var connected_device in device.Value)
 				{
+					if (connected_device.Left == -1000) continue;
+
+
 					Point c_d_p = new Point(connected_device.Left+connected_device.Width/2, connected_device.Top+connected_device.Height/2);
 					e.Graphics.DrawLine(Pens.Black, d_p, c_d_p);
 				}

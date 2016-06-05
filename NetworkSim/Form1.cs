@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,12 +36,8 @@ namespace NetworkSim
 				@"192.168.1.128;255.255.255.128;-;1
 				  192.168.1.0;255.255.255.128;-;0");
 
-			pc1.SetIP("192.168.1.2/25");
-			pc1.SetGateway("192.168.1.1");
 
-			pc2.SetIP("192.168.1.3/25");
-			pc2.SetGateway("192.168.1.1");
-
+			pcGroup1.SetPCs(IPAddress.Parse("192.168.1.2"), IPAddress.Parse("192.168.1.5"), IPAddress.Parse("255.255.255.128"), IPAddress.Parse("192.168.1.1"));
 
 			pc3.SetIP("192.168.1.131/25");
 			pc3.SetGateway("192.168.1.130");
@@ -48,11 +45,10 @@ namespace NetworkSim
 			pc4.SetIP("192.168.1.132/25");
 			pc4.SetGateway("192.168.1.130");
 
-			gate1.SetIP("192.168.132/25");
+			gate1.SetIP("192.168.1.132/25");
 
-			pc1.DuplexConnect(0, 0, hub1);
-			pc2.DuplexConnect(0, 1, hub1);
-			hub1.DuplexConnect(2, 0, server1);
+			pcGroup1.Connect(hub1, 1);
+			hub1.DuplexConnect(0, 0, server1);
 
 			server1.DuplexConnect(1, 2, hub2);
 			hub2.DuplexConnect(0, 0, pc3);
