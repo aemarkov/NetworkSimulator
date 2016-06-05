@@ -40,10 +40,10 @@
 			// 
 			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label1.Location = new System.Drawing.Point(0, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(130, 24);
+			this.label1.Size = new System.Drawing.Size(100, 18);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "PC group";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -51,41 +51,52 @@
 			// lblIPStart
 			// 
 			this.lblIPStart.AutoSize = true;
-			this.lblIPStart.Location = new System.Drawing.Point(3, 28);
+			this.lblIPStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.lblIPStart.Location = new System.Drawing.Point(4, 18);
 			this.lblIPStart.Name = "lblIPStart";
-			this.lblIPStart.Size = new System.Drawing.Size(40, 13);
+			this.lblIPStart.Size = new System.Drawing.Size(27, 9);
 			this.lblIPStart.TabIndex = 1;
 			this.lblIPStart.Text = "0.0.0.0";
 			// 
 			// lblIPEnd
 			// 
 			this.lblIPEnd.AutoSize = true;
-			this.lblIPEnd.Location = new System.Drawing.Point(3, 41);
+			this.lblIPEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.lblIPEnd.Location = new System.Drawing.Point(4, 27);
 			this.lblIPEnd.Name = "lblIPEnd";
-			this.lblIPEnd.Size = new System.Drawing.Size(40, 13);
+			this.lblIPEnd.Size = new System.Drawing.Size(27, 9);
 			this.lblIPEnd.TabIndex = 2;
 			this.lblIPEnd.Text = "0.0.0.0";
 			// 
 			// comboIPs
 			// 
+			this.comboIPs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboIPs.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.comboIPs.FormattingEnabled = true;
-			this.comboIPs.Location = new System.Drawing.Point(6, 58);
+			this.comboIPs.Location = new System.Drawing.Point(6, 39);
 			this.comboIPs.Name = "comboIPs";
-			this.comboIPs.Size = new System.Drawing.Size(119, 21);
+			this.comboIPs.Size = new System.Drawing.Size(89, 17);
 			this.comboIPs.TabIndex = 3;
 			// 
 			// textBox1
 			// 
-			this.textBox1.Location = new System.Drawing.Point(6, 86);
+			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textBox1.Location = new System.Drawing.Point(6, 62);
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(119, 20);
+			this.textBox1.Size = new System.Drawing.Size(89, 17);
 			this.textBox1.TabIndex = 4;
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(6, 113);
+			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.button1.Location = new System.Drawing.Point(6, 85);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(119, 23);
+			this.button1.Size = new System.Drawing.Size(89, 23);
 			this.button1.TabIndex = 5;
 			this.button1.Text = "button1";
 			this.button1.UseVisualStyleBackColor = true;
@@ -104,7 +115,7 @@
 			this.Controls.Add(this.lblIPStart);
 			this.Controls.Add(this.label1);
 			this.Name = "PCGroup";
-			this.Size = new System.Drawing.Size(130, 167);
+			this.Size = new System.Drawing.Size(100, 132);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

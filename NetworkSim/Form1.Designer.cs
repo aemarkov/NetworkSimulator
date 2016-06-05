@@ -40,13 +40,25 @@
 			this.column_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.trackBar1 = new System.Windows.Forms.TrackBar();
 			this.netDrawer1 = new NetworkComponents.Controls.NetDrawer();
-			this.server3 = new NetworkComponents.Controls.Server();
-			this.hub2 = new NetworkComponents.Controls.Hub();
-			this.pcGroup2 = new NetworkComponents.Controls.PCGroup();
-			this.server2 = new NetworkComponents.Controls.Server();
 			this.server1 = new NetworkComponents.Controls.Server();
+			this.server3 = new NetworkComponents.Controls.Server();
+			this.server2 = new NetworkComponents.Controls.Server();
+			this.hub2 = new NetworkComponents.Controls.Hub();
 			this.hub1 = new NetworkComponents.Controls.Hub();
 			this.pcGroup1 = new NetworkComponents.Controls.PCGroup();
+			this.pcGroup2 = new NetworkComponents.Controls.PCGroup();
+			this.pcGroup3 = new NetworkComponents.Controls.PCGroup();
+			this.hub3 = new NetworkComponents.Controls.Hub();
+			this.server4 = new NetworkComponents.Controls.Server();
+			this.pcGroup4 = new NetworkComponents.Controls.PCGroup();
+			this.pcGroup5 = new NetworkComponents.Controls.PCGroup();
+			this.pcGroup6 = new NetworkComponents.Controls.PCGroup();
+			this.hub4 = new NetworkComponents.Controls.Hub();
+			this.hub5 = new NetworkComponents.Controls.Hub();
+			this.hub6 = new NetworkComponents.Controls.Hub();
+			this.server5 = new NetworkComponents.Controls.Server();
+			this.server6 = new NetworkComponents.Controls.Server();
+			this.server7 = new NetworkComponents.Controls.Server();
 			((System.ComponentModel.ISupportInitialize)(this.table_packages)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
 			this.netDrawer1.SuspendLayout();
@@ -154,85 +166,206 @@
 			// netDrawer1
 			// 
 			this.netDrawer1.BackColor = System.Drawing.Color.White;
-			this.netDrawer1.Controls.Add(this.server3);
-			this.netDrawer1.Controls.Add(this.hub2);
+			this.netDrawer1.Controls.Add(this.server7);
+			this.netDrawer1.Controls.Add(this.server6);
+			this.netDrawer1.Controls.Add(this.server5);
+			this.netDrawer1.Controls.Add(this.hub6);
+			this.netDrawer1.Controls.Add(this.hub5);
+			this.netDrawer1.Controls.Add(this.hub4);
+			this.netDrawer1.Controls.Add(this.pcGroup6);
+			this.netDrawer1.Controls.Add(this.pcGroup5);
+			this.netDrawer1.Controls.Add(this.pcGroup4);
+			this.netDrawer1.Controls.Add(this.server4);
+			this.netDrawer1.Controls.Add(this.hub3);
+			this.netDrawer1.Controls.Add(this.pcGroup3);
 			this.netDrawer1.Controls.Add(this.pcGroup2);
-			this.netDrawer1.Controls.Add(this.server2);
-			this.netDrawer1.Controls.Add(this.server1);
-			this.netDrawer1.Controls.Add(this.hub1);
 			this.netDrawer1.Controls.Add(this.pcGroup1);
+			this.netDrawer1.Controls.Add(this.server1);
+			this.netDrawer1.Controls.Add(this.server3);
+			this.netDrawer1.Controls.Add(this.server2);
+			this.netDrawer1.Controls.Add(this.hub2);
+			this.netDrawer1.Controls.Add(this.hub1);
 			this.netDrawer1.Location = new System.Drawing.Point(12, 12);
 			this.netDrawer1.Name = "netDrawer1";
 			this.netDrawer1.Size = new System.Drawing.Size(791, 486);
 			this.netDrawer1.TabIndex = 0;
 			// 
+			// server1
+			// 
+			this.server1.BackColor = System.Drawing.Color.Silver;
+			this.server1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.server1.Location = new System.Drawing.Point(215, 3);
+			this.server1.Name = "server1";
+			this.server1.Size = new System.Drawing.Size(100, 100);
+			this.server1.TabIndex = 12;
+			// 
 			// server3
 			// 
 			this.server3.BackColor = System.Drawing.Color.Silver;
 			this.server3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.server3.InterfacesCount_U = 2;
-			this.server3.Location = new System.Drawing.Point(342, 232);
+			this.server3.Location = new System.Drawing.Point(215, 144);
 			this.server3.Name = "server3";
-			this.server3.Size = new System.Drawing.Size(130, 120);
-			this.server3.TabIndex = 6;
-			// 
-			// hub2
-			// 
-			this.hub2.BackColor = System.Drawing.Color.Silver;
-			this.hub2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.hub2.InterfacesCount_U = 20;
-			this.hub2.Location = new System.Drawing.Point(179, 232);
-			this.hub2.Name = "hub2";
-			this.hub2.Size = new System.Drawing.Size(130, 120);
-			this.hub2.TabIndex = 5;
-			// 
-			// pcGroup2
-			// 
-			this.pcGroup2.BackColor = System.Drawing.SystemColors.ControlDark;
-			this.pcGroup2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pcGroup2.Location = new System.Drawing.Point(20, 215);
-			this.pcGroup2.Name = "pcGroup2";
-			this.pcGroup2.Size = new System.Drawing.Size(130, 167);
-			this.pcGroup2.TabIndex = 4;
+			this.server3.Size = new System.Drawing.Size(100, 100);
+			this.server3.TabIndex = 11;
 			// 
 			// server2
 			// 
 			this.server2.BackColor = System.Drawing.Color.Silver;
 			this.server2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.server2.InterfacesCount_U = 2;
-			this.server2.Location = new System.Drawing.Point(539, 130);
+			this.server2.Location = new System.Drawing.Point(352, 144);
 			this.server2.Name = "server2";
-			this.server2.Size = new System.Drawing.Size(130, 120);
-			this.server2.TabIndex = 3;
+			this.server2.Size = new System.Drawing.Size(100, 100);
+			this.server2.TabIndex = 10;
 			// 
-			// server1
+			// hub2
 			// 
-			this.server1.BackColor = System.Drawing.Color.Silver;
-			this.server1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.server1.InterfacesCount_U = 2;
-			this.server1.Location = new System.Drawing.Point(342, 48);
-			this.server1.Name = "server1";
-			this.server1.Size = new System.Drawing.Size(130, 120);
-			this.server1.TabIndex = 2;
+			this.hub2.BackColor = System.Drawing.Color.Silver;
+			this.hub2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.hub2.InterfacesCount_U = 8;
+			this.hub2.Location = new System.Drawing.Point(109, 144);
+			this.hub2.Name = "hub2";
+			this.hub2.Size = new System.Drawing.Size(100, 80);
+			this.hub2.TabIndex = 8;
 			// 
 			// hub1
 			// 
 			this.hub1.BackColor = System.Drawing.Color.Silver;
 			this.hub1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.hub1.InterfacesCount_U = 20;
-			this.hub1.Location = new System.Drawing.Point(179, 48);
+			this.hub1.Location = new System.Drawing.Point(109, 3);
 			this.hub1.Name = "hub1";
-			this.hub1.Size = new System.Drawing.Size(130, 120);
-			this.hub1.TabIndex = 1;
+			this.hub1.Size = new System.Drawing.Size(100, 80);
+			this.hub1.TabIndex = 7;
 			// 
 			// pcGroup1
 			// 
 			this.pcGroup1.BackColor = System.Drawing.SystemColors.ControlDark;
 			this.pcGroup1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pcGroup1.Location = new System.Drawing.Point(20, 26);
+			this.pcGroup1.Location = new System.Drawing.Point(3, 3);
 			this.pcGroup1.Name = "pcGroup1";
-			this.pcGroup1.Size = new System.Drawing.Size(130, 167);
-			this.pcGroup1.TabIndex = 0;
+			this.pcGroup1.Size = new System.Drawing.Size(100, 132);
+			this.pcGroup1.TabIndex = 13;
+			// 
+			// pcGroup2
+			// 
+			this.pcGroup2.BackColor = System.Drawing.SystemColors.ControlDark;
+			this.pcGroup2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pcGroup2.Location = new System.Drawing.Point(3, 144);
+			this.pcGroup2.Name = "pcGroup2";
+			this.pcGroup2.Size = new System.Drawing.Size(100, 132);
+			this.pcGroup2.TabIndex = 14;
+			// 
+			// pcGroup3
+			// 
+			this.pcGroup3.BackColor = System.Drawing.SystemColors.ControlDark;
+			this.pcGroup3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pcGroup3.Location = new System.Drawing.Point(3, 282);
+			this.pcGroup3.Name = "pcGroup3";
+			this.pcGroup3.Size = new System.Drawing.Size(100, 132);
+			this.pcGroup3.TabIndex = 15;
+			// 
+			// hub3
+			// 
+			this.hub3.BackColor = System.Drawing.Color.Silver;
+			this.hub3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.hub3.InterfacesCount_U = 8;
+			this.hub3.Location = new System.Drawing.Point(109, 282);
+			this.hub3.Name = "hub3";
+			this.hub3.Size = new System.Drawing.Size(100, 80);
+			this.hub3.TabIndex = 16;
+			// 
+			// server4
+			// 
+			this.server4.BackColor = System.Drawing.Color.Silver;
+			this.server4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.server4.Location = new System.Drawing.Point(215, 282);
+			this.server4.Name = "server4";
+			this.server4.Size = new System.Drawing.Size(100, 100);
+			this.server4.TabIndex = 17;
+			// 
+			// pcGroup4
+			// 
+			this.pcGroup4.BackColor = System.Drawing.SystemColors.ControlDark;
+			this.pcGroup4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pcGroup4.Location = new System.Drawing.Point(687, 3);
+			this.pcGroup4.Name = "pcGroup4";
+			this.pcGroup4.Size = new System.Drawing.Size(100, 132);
+			this.pcGroup4.TabIndex = 18;
+			// 
+			// pcGroup5
+			// 
+			this.pcGroup5.BackColor = System.Drawing.SystemColors.ControlDark;
+			this.pcGroup5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pcGroup5.Location = new System.Drawing.Point(687, 144);
+			this.pcGroup5.Name = "pcGroup5";
+			this.pcGroup5.Size = new System.Drawing.Size(100, 132);
+			this.pcGroup5.TabIndex = 19;
+			// 
+			// pcGroup6
+			// 
+			this.pcGroup6.BackColor = System.Drawing.SystemColors.ControlDark;
+			this.pcGroup6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pcGroup6.Location = new System.Drawing.Point(687, 282);
+			this.pcGroup6.Name = "pcGroup6";
+			this.pcGroup6.Size = new System.Drawing.Size(100, 132);
+			this.pcGroup6.TabIndex = 20;
+			// 
+			// hub4
+			// 
+			this.hub4.BackColor = System.Drawing.Color.Silver;
+			this.hub4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.hub4.InterfacesCount_U = 20;
+			this.hub4.Location = new System.Drawing.Point(581, 3);
+			this.hub4.Name = "hub4";
+			this.hub4.Size = new System.Drawing.Size(100, 80);
+			this.hub4.TabIndex = 21;
+			// 
+			// hub5
+			// 
+			this.hub5.BackColor = System.Drawing.Color.Silver;
+			this.hub5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.hub5.InterfacesCount_U = 8;
+			this.hub5.Location = new System.Drawing.Point(581, 144);
+			this.hub5.Name = "hub5";
+			this.hub5.Size = new System.Drawing.Size(100, 80);
+			this.hub5.TabIndex = 22;
+			// 
+			// hub6
+			// 
+			this.hub6.BackColor = System.Drawing.Color.Silver;
+			this.hub6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.hub6.InterfacesCount_U = 8;
+			this.hub6.Location = new System.Drawing.Point(581, 282);
+			this.hub6.Name = "hub6";
+			this.hub6.Size = new System.Drawing.Size(100, 80);
+			this.hub6.TabIndex = 23;
+			// 
+			// server5
+			// 
+			this.server5.BackColor = System.Drawing.Color.Silver;
+			this.server5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.server5.Location = new System.Drawing.Point(475, 3);
+			this.server5.Name = "server5";
+			this.server5.Size = new System.Drawing.Size(100, 100);
+			this.server5.TabIndex = 24;
+			// 
+			// server6
+			// 
+			this.server6.BackColor = System.Drawing.Color.Silver;
+			this.server6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.server6.Location = new System.Drawing.Point(475, 144);
+			this.server6.Name = "server6";
+			this.server6.Size = new System.Drawing.Size(100, 100);
+			this.server6.TabIndex = 25;
+			// 
+			// server7
+			// 
+			this.server7.BackColor = System.Drawing.Color.Silver;
+			this.server7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.server7.Location = new System.Drawing.Point(475, 282);
+			this.server7.Name = "server7";
+			this.server7.Size = new System.Drawing.Size(100, 100);
+			this.server7.TabIndex = 26;
 			// 
 			// Form1
 			// 
@@ -270,14 +403,26 @@
 		private System.Windows.Forms.DataGridView table_packages;
 		private System.Windows.Forms.DataGridViewTextBoxColumn column_package;
 		private System.Windows.Forms.DataGridViewTextBoxColumn column_status;
-		private NetworkComponents.Controls.Hub hub1;
-		private NetworkComponents.Controls.PCGroup pcGroup1;
 		private System.Windows.Forms.TrackBar trackBar1;
-		private NetworkComponents.Controls.Server server1;
-		private NetworkComponents.Controls.Hub hub2;
-		private NetworkComponents.Controls.PCGroup pcGroup2;
+		private NetworkComponents.Controls.Hub hub1;
 		private NetworkComponents.Controls.Server server2;
+		private NetworkComponents.Controls.Hub hub2;
 		private NetworkComponents.Controls.Server server3;
+		private NetworkComponents.Controls.Server server1;
+		private NetworkComponents.Controls.Server server7;
+		private NetworkComponents.Controls.Server server6;
+		private NetworkComponents.Controls.Server server5;
+		private NetworkComponents.Controls.Hub hub6;
+		private NetworkComponents.Controls.Hub hub5;
+		private NetworkComponents.Controls.Hub hub4;
+		private NetworkComponents.Controls.PCGroup pcGroup6;
+		private NetworkComponents.Controls.PCGroup pcGroup5;
+		private NetworkComponents.Controls.PCGroup pcGroup4;
+		private NetworkComponents.Controls.Server server4;
+		private NetworkComponents.Controls.Hub hub3;
+		private NetworkComponents.Controls.PCGroup pcGroup3;
+		private NetworkComponents.Controls.PCGroup pcGroup2;
+		private NetworkComponents.Controls.PCGroup pcGroup1;
 	}
 }
 

@@ -104,6 +104,9 @@
     <EmbeddedResource Include="Controls\Gate.resx">
       <DependentUpon>Gate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Hub.resx">
+      <DependentUpon>Hub.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\NetDrawer.resx">
       <DependentUpon>NetDrawer.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PCGroup.resx">
       <DependentUpon>PCGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Server.resx">
+      <DependentUpon>Server.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

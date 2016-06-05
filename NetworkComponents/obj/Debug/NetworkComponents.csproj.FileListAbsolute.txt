@@ -9,3 +9,5 @@ D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.C
 D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.Gate.resources
 D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.PCGroup.resources
 D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.csprojResolveAssemblyReference.cache
+D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.Hub.resources
+D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.Server.resources

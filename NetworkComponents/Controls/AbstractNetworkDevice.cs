@@ -22,7 +22,7 @@ namespace NetworkComponents.Controls
 		/// <summary>
 		/// Колисчество интерфейсов
 		/// </summary>
-		public virtual int InterfacesCount { get; }
+		public virtual int InterfacesCount { get; private set; }
 
 		//Список подключенных устройств
 		//Ключ - номер порта, к которому подключено устройство
@@ -85,8 +85,9 @@ namespace NetworkComponents.Controls
 
 		public virtual void SetIP(params String[] ips)
 		{
-			if (ips.Length != InterfacesCount)
-				throw new ArgumentException("Invalid number of IP adresses");
+			//if (ips.Length != InterfacesCount)
+			//	throw new ArgumentException("Invalid number of IP adresses");
+			InterfacesCount = ips.Length;
 
 			InterfaceAdresses = new IPAddressWithMask[InterfacesCount];
 			for (int i = 0; i < ips.Length; i++)

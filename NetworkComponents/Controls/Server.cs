@@ -17,8 +17,6 @@ namespace NetworkComponents.Controls
 	/// </summary>
 	public partial class Server : AbstractNetworkDevice
 	{
-		public int InterfacesCount_U { get; set; } = 2;
-		public override int InterfacesCount { get { return InterfacesCount_U; } }
 
 		//PROXY-таблица
 		private List<Proxy> proxy_table;
@@ -55,16 +53,7 @@ namespace NetworkComponents.Controls
 				this.route_table.Add(Route.Parse(r));
 			}
 		}
-
-		/// <summary>
-		/// Задает таблицы
-		/// </summary>
-		/// <param name="proxy_table">Прокси-таблица</param>
-		/// <param name="route_table">Таблица маршрутизации</param>
-		public void SetupServer(string proxy_table, string route_table)
-		{
-
-		}
+		
 
 		public override void ProcessPackage(Package package, AbstractNetworkDevice sender)
 		{
