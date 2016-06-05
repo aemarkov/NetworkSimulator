@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Net;
 
 namespace NetworkComponents.Controls
 {
@@ -32,6 +33,16 @@ namespace NetworkComponents.Controls
 		public PC()
 		{
 			InitializeComponent();
+		}
+
+		/// <summary>
+		/// Устанавливает адреса интерфейсов
+		/// </summary>
+		/// <param name="ips">IP-адрес</param>
+		public override void SetIP(params String[] ips)
+		{
+			base.SetIP(ips);
+			lblIP.Text = InterfaceAdresses[0].ToString();
 		}
 
 		/*
@@ -78,6 +89,19 @@ namespace NetworkComponents.Controls
 			else
 			{
 				Logger.WriteLine(Name + " (" + InterfaceAdresses[0] + ") DIDN'T send package " + package + " to " + ConnectedDevices[0].Name + ": OTHER SUBNET"); 
+			}
+		}
+
+		///Отправка пакета
+		private void btnSend_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				SendPackage(new Package(txtIP.Text));
+			}
+			catch(FormatException)
+			{
+				MessageBox.Show("Invalid IP-Address");
 			}
 		}
 	}

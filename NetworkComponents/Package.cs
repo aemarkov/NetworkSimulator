@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,23 +37,27 @@ namespace NetworkComponents
 
 		public List<String> Trace { get; private set; }
 
-		
-
 		public Package()
 		{
 			Trace = new List<string>();
 			PackageState = State.SENDING;
 		}
 
+		public Package(IPAddress address):this()
+		{
+			EndIP = new Stack<System.Net.IPAddress>();
+			EndIP.Push(address);
+		}
+
 		/// <summary>
 		/// Создает пакет на основе строкоого представления конечного адреса
 		/// </summary>
 		/// <param name="end_ip"></param>
-		public Package(string end_ip):this()
-		{
-			EndIP = new Stack<System.Net.IPAddress>();
-			EndIP.Push(System.Net.IPAddress.Parse(end_ip));
+		public Package(string end_ip):this(IPAddress.Parse(end_ip))
+		{	
 		}
+
+		
 
 		/// ОТСЛЕЖИВАНИЕ ПУТИ
 

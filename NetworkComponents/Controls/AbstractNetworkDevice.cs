@@ -15,7 +15,7 @@ namespace NetworkComponents.Controls
 	/// <summary>
 	/// Абстрактный класс сетевого устройства
 	/// </summary>
-	public abstract partial class AbstractNetworkDevice : UserControl
+	public  partial class AbstractNetworkDevice : UserControl
 	{
 		public event Action<Point, AbstractNetworkDevice> DeviceMove;
 
@@ -23,7 +23,7 @@ namespace NetworkComponents.Controls
 		/// <summary>
 		/// Колисчество интерфейсов
 		/// </summary>
-		public abstract int InterfacesCount { get; }
+		public virtual int InterfacesCount { get; }
 
 		//Список подключенных устройств
 		//Ключ - номер порта, к которому подключено устройство
@@ -74,7 +74,7 @@ namespace NetworkComponents.Controls
 		/// Устанавливает адреса интерфейсов
 		/// </summary>
 		/// <param name="ips">IP-адрес</param>
-		public void SetIP(params IPAddressWithMask[] ips)
+		public  void SetIP(params IPAddressWithMask[] ips)
 		{
 			if (ips.Length != InterfacesCount)
 				throw new ArgumentException("Invalid number of IP adresses");
@@ -82,7 +82,7 @@ namespace NetworkComponents.Controls
 			InterfaceAdresses = ips;
 		}
 
-		public void SetIP(params String[] ips)
+		public virtual void SetIP(params String[] ips)
 		{
 			if (ips.Length != InterfacesCount)
 				throw new ArgumentException("Invalid number of IP adresses");
@@ -138,7 +138,7 @@ namespace NetworkComponents.Controls
 		/// Обработка пакета
 		/// </summary>
 		/// <param name="package"></param>
-		public abstract void ProcessPackage(Package package, AbstractNetworkDevice sender);
+		public virtual void ProcessPackage(Package package, AbstractNetworkDevice sender) { }
 
 	
 		//----------------------------------------------
@@ -227,6 +227,7 @@ namespace NetworkComponents.Controls
 				is_drag = true;
 			}
 		}
+
 
 	}
 }

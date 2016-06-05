@@ -62,7 +62,7 @@ namespace NetworkSim
 			netDrawer1.UpdateConnections();
 
 			
-			pc1.SendPackage(new NetworkComponents.Package("192.168.1.131"));
+			//pc1.SendPackage(new NetworkComponents.Package("192.168.1.131"));
 		}
 
 	
@@ -98,6 +98,8 @@ namespace NetworkSim
 		{
 			PackageManager.Reset();
 			table_packages.Rows.Clear();
+			txtLog.Text = "";
+			trace_details.Text = "";
 		}
 
 		private void Table_packages_CellClick(object sender, DataGridViewCellEventArgs e)
