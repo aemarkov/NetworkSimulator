@@ -23,6 +23,7 @@ namespace NetworkSim
 		{
 			Logger.TextWrited += Logger_TextWrited;
 			PackageManager.NewPackage += PackageManager_NewPackage;
+			table_packages.CellClick += Table_packages_CellClick;
 
 			server1.SetIP("192.168.1.1/25", "192.168.1.130/25");
 			server1.SetProxy(
@@ -64,10 +65,26 @@ namespace NetworkSim
 			pc1.SendPackage(new NetworkComponents.Package("192.168.1.131"));
 		}
 
+	
+
 		//Новый пакет сгенерирован
-		private void PackageManager_NewPackage(Package obj)
+		private void PackageManager_NewPackage(Package pckg)
 		{
-			listBoxPackages.Items.Add(obj);
+			table_packages.Rows.Clear();
+
+			foreach (var package in PackageManager.Pacakges)
+			{
+				int id = table_packages.Rows.Add();
+				table_packages.Rows[id].Cells[0].Value = package.ToString();
+				table_packages.Rows[id].Cells[1].Value = package.PackageState;
+
+				if (package.PackageState == Package.State.SENDING)
+					table_packages.Rows[id].DefaultCellStyle.BackColor = Color.Yellow;
+				else if (package.PackageState == Package.State.RECEIVED)
+					table_packages.Rows[id].DefaultCellStyle.BackColor = Color.Green;
+				else
+					table_packages.Rows[id].DefaultCellStyle.BackColor = Color.Red;
+			}
 		}
 
 		//Новое сообщение в лог
@@ -80,23 +97,24 @@ namespace NetworkSim
 		private void btnReset_Click(object sender, EventArgs e)
 		{
 			PackageManager.Reset();
+			table_packages.Rows.Clear();
 		}
 
-		private void listBoxPackages_SelectedIndexChanged(object sender, EventArgs e)
+		private void Table_packages_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
-			if(listBoxPackages.SelectedIndex!=-1)
+			if (e.RowIndex == -1) return;
+
+			var package = PackageManager.Pacakges[e.RowIndex];
+
+			trace_details.Text = "";
+			int i = 1;
+			foreach (var stage in package.Trace)
 			{
-				var package = (Package)listBoxPackages.Items[listBoxPackages.SelectedIndex];
-
-				trace_details.Items.Clear();
-				foreach(var stage in package.Trace)
-				{
-					trace_details.Items.Add(stage);
-				}
-
-				trace_details.Items.Add("STATUS: " + package.PackageState);
-
+				trace_details.Text += i + ". " + stage + Environment.NewLine; ;
+				i++;
 			}
+
+			trace_details.Text += Environment.NewLine + "STATUS: " + package.PackageState;
 		}
 	}
 }

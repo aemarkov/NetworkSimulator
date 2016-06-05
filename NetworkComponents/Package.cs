@@ -68,7 +68,25 @@ namespace NetworkComponents
 		//Возвращает строкове представление пакета
 		public override String ToString()
 		{
-			return "[#"+ID+"; "+ StartIP + "; " + EndIP.Peek() + "]";
+			/*StringBuilder sb = new StringBuilder();
+
+			sb.Append("[#").Append(ID)
+				.Append("; ")
+				.Append(StartIP).Append("; ");
+
+			if (EndIP.Count == 0)
+				sb.Append(" ").Append(EndIP.Peek());
+			else
+			{
+				sb.Append("(");
+				foreach (var x in EndIP)
+					sb.Append(x).Append(" ");
+				sb.Append(")");
+			}
+
+			sb.Append("]");*/
+
+			return  "[#"+ID+"; "+ StartIP + "; " + EndIP.Last() + "]";
 		}
 
 		//Создание копии

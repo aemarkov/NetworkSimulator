@@ -55,6 +55,7 @@ namespace NetworkComponents.Controls
 
 			Logger.WriteLine(stage);
 			package.AddStage(stage);
+			PackageManager.AddPackage(package);
 		}
 
 		/// <summary>
