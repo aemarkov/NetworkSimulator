@@ -52,7 +52,8 @@ namespace NetworkSim
 			//pc1.SendPackage(new NetworkComponents.Package("192.168.1.131"));
 		}
 
-	
+
+		#region EVENTS
 
 		//Новый пакет сгенерирован
 		private void PackageManager_NewPackage(Package pckg)
@@ -106,9 +107,6 @@ namespace NetworkSim
 			trace_details.Text += Environment.NewLine + "STATUS: " + package.PackageState;
 		}
 
-		private void trackBar1_Scroll(object sender, EventArgs e)
-		{
-			netDrawer1.Zoom(trackBar1.Value / 10f);
-		}
+		#endregion
 	}
 }
