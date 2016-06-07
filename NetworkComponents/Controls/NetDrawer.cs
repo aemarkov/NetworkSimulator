@@ -16,15 +16,26 @@ namespace NetworkComponents.Controls
 	/// </summary>
 	public partial class NetDrawer : Panel
 	{
+		//Соединения для отрисовки линий
 		private Dictionary<UserControl, List<UserControl>> connections;
-		private float zoom=1;
 
+		//Для отрисовки движущихся пакетов
+		private List<MovingPackage> moving_packages;
+
+		ulong current_time = 0;
+		
 		public NetDrawer()
 		{
 			InitializeComponent();
 			connections = new Dictionary<UserControl, List<UserControl>>();
+			moving_packages = new List<MovingPackage>();
+            DoubleBuffered = true;
 		}
 
+		/// <summary>
+		/// Инициализация.
+		/// Обязательно вызвать
+		/// </summary>
 		public void Init()
 		{
 			foreach (var control in Controls)
@@ -37,6 +48,7 @@ namespace NetworkComponents.Controls
 			}
 		}
 
+		//Устройство сдвинуто
 		private void Device_DeviceMove(Point arg1, UserControl arg2)
 		{
 			Invalidate();
@@ -74,23 +86,21 @@ namespace NetworkComponents.Controls
 					/*foreach (var pc in group.pcs)
 						make_connections(pc);*/
 
-					var con = group.pcs.FirstOrDefault()?.Connections;
-					if (con != null  && con.Count!=0)
-					{
-						var connected = con.First().Value;
-						connections.Add(group, new List<UserControl>() { connected });
-					}
+                    if (group.pcs.FirstOrDefault() != null)
+                    {
+                        var con = group.pcs.FirstOrDefault().Connections;
+                        if (con != null && con.Count != 0)
+                        {
+                            var connected = con.First().Value;
+                            connections.Add(group, new List<UserControl>() { connected });
+                        }
+                    }
 				}
 				
 			}
 		}
 
-		public void Zoom(float zoom)
-		{
-			this.zoom = zoom;
-			Invalidate();
-		}
-
+		//Сохраняет соединения
 		private void make_connections(AbstractNetworkDevice device)
 		{
 			var connections = device.Connections;
@@ -106,8 +116,8 @@ namespace NetworkComponents.Controls
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-			e.Graphics.ScaleTransform(zoom, zoom);
 			
+			//Рисование линий
 			foreach(var device in connections)
 			{
 				Point d_p = new Point(device.Key.Left + device.Key.Width/2, device.Key.Top+device.Key.Height/2);
@@ -123,7 +133,79 @@ namespace NetworkComponents.Controls
 				}
 			}
 
-			e.Graphics.ScaleTransform(zoom, zoom);
+			//Рисование пакетов
+			for(int i = 0; i<moving_packages.Count;i++)
+			{
+				if(moving_packages[i].EndTime<current_time)
+				{
+					moving_packages.RemoveAt(i);
+					continue;
+				}
+
+				var pos = moving_packages[i].GetPosInTime(current_time);
+				e.Graphics.FillEllipse(Brushes.Red, pos.X-10, pos.Y-10, 20, 20);
+
+			}
+
+		}
+
+		/// <summary>
+		/// Надо нарисовать движение пакета от одного устройства к
+		/// другому за вермя duration
+		/// </summary>
+		/// <param name="device1"></param>
+		/// <param name="device2"></param>
+		/// <param name="duration"></param>
+		public void DrawPackage(Control device1, Control device2, uint duration)
+		{
+			var package = new MovingPackage() { color = Color.Red, StartDevice = device1, EndDevice = device2, StartTime = current_time, EndTime = current_time + duration };
+			moving_packages.Add(package);
+		}
+
+		public void UpdateAnimation(uint dt)
+		{
+			current_time += dt;
+			Invalidate();			
+		}
+	}
+
+
+	/// <summary>
+	/// Вспомогательный класс для хранения
+	/// информации о картинке пакета
+	/// </summary>
+	class MovingPackage
+	{
+		public Color color { get; set; }
+		public Control EndDevice { get; set; }
+		public Control StartDevice { get; set; }
+		public ulong StartTime { get; set; }
+		public ulong EndTime { get; set; }
+
+		
+		public PointF GetDist()
+		{
+            float dx = EndDevice.Left + EndDevice.Width/2 - (StartDevice.Left+StartDevice.Width/2);
+			float dy = EndDevice.Top + EndDevice.Height/2 - (StartDevice.Top+StartDevice.Height/2);
+			return new PointF(dx, dy);
+		}
+
+		public PointF GetPosInTime(ulong time)
+		{
+            float dt =  ((float)(time - StartTime)) / (EndTime - StartTime);
+			var dist = GetDist();
+            dist.X = StartDevice.Left + StartDevice.Width/2 + dist.X * dt; ;
+            dist.Y = StartDevice.Top  + StartDevice.Height/2 + dist.Y * dt; ;
+
+			return dist;
+		}
+
+		public MovingPackage() { }
+
+		public MovingPackage(AbstractNetworkDevice device1, AbstractNetworkDevice device2, long end_time)
+		{
+			EndDevice = device2;
+
 		}
 	}
 }

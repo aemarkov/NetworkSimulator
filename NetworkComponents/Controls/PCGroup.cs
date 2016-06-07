@@ -40,7 +40,7 @@ namespace NetworkComponents.Controls
 
 			foreach(var ip in ips)
 			{
-				var pc = new PC();
+				var pc = new PC(this);
 				pc.Left = -1000;
 				pc.Top = -1000;
 				pc.SetIP(new IPAddressWithMask(ip, mask));

@@ -34,7 +34,8 @@ namespace NetworkComponents
 				packages.Add(package);
 				package.ID = id++;
 			}
-			NewPackage?.Invoke(package);
+            if(NewPackage!=null)
+			    NewPackage.Invoke(package);
 
 		}
 

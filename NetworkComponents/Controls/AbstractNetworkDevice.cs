@@ -18,16 +18,28 @@ namespace NetworkComponents.Controls
 	/// </summary>
 	public partial class AbstractNetworkDevice : UserControl, IMovable
 	{
+		/// <summary>
+		/// Задержка перед отправкой пакета (графона ради)
+		/// </summary>
+		public static uint SendingDrawDelay { get; set; }
+
+		/// <summary>
+		/// Объект, к которому прикреплены комопненты
+		/// Костыль, да.
+		/// 
+		/// Но Parent не работает для ПК в ГруппахПК
+		/// </summary>
+		public static NetDrawer Drawer { get; set; }
+
+		/// <summary>
+		/// Используется для перемещения контрола
+		/// </summary>
 		public Mover Mover { get; private set; }
 
 		/// <summary>
 		/// Колисчество интерфейсов
 		/// </summary>
 		public virtual int InterfacesCount { get; private set; }
-
-		//Список подключенных устройств
-		//Ключ - номер порта, к которому подключено устройство
-		protected Dictionary<int,AbstractNetworkDevice> ConnectedDevices { get; set; }
 
 		/// <summary>
 		/// Список подключений (только для чтения)
@@ -45,6 +57,12 @@ namespace NetworkComponents.Controls
 			get { return lblName.Text; }
 			set { lblName.Text = value; }
 		}
+
+
+		//Список подключенных устройств
+		//Ключ - номер порта, к которому подключено устройство
+		protected Dictionary<int, AbstractNetworkDevice> ConnectedDevices { get; set; }
+
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		/// НАСТРОЙКА
@@ -97,6 +115,7 @@ namespace NetworkComponents.Controls
 			display_interfaces();
 		}
 
+        //Отображает интерфейсы на форме
 		private void display_interfaces()
 		{
 			StringBuilder builder = new StringBuilder();
@@ -134,7 +153,18 @@ namespace NetworkComponents.Controls
 			ConnectedDevices.Add(port_number, device);
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>
+        /// Возвращает контрол этого объекта.
+        /// Костыль, чтобы ПК мог нормально работать в PCGroup
+        /// </summary>
+        /// <returns></returns>
+        public virtual Control GetControl()
+        {
+            return this;
+        }
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
 		/// СЕТЕВОЕ ПОВЕДЕНИЕ
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -174,29 +204,52 @@ namespace NetworkComponents.Controls
 			if (!ConnectedDevices.ContainsKey(port))
 				throw new ArgumentException("Device to this port not connected");
 
-			var timer = new System.Timers.Timer(2000);
-			timer.Elapsed += new System.Timers.ElapsedEventHandler(delegate (object sender, ElapsedEventArgs args)
-			  {
-				  PackageManager.AddPackage(package);
+            //Логгирование маршрутов пакетов
+            PackageManager.AddPackage(package);
 
-				  String stage;
-				  if (InterfaceAdresses != null)
-					  stage = TraceToString(Name, InterfaceAdresses[port], port, ConnectedDevices[port].Name, package);
-				  else
-					  stage = TraceToString(Name, null, port, ConnectedDevices[port].Name, package);
+            String stage;
+            if (InterfaceAdresses != null)
+                stage = TraceToString(Name, InterfaceAdresses[port], port, ConnectedDevices[port].Name, package);
+            else
+                stage = TraceToString(Name, null, port, ConnectedDevices[port].Name, package);
 
-				  Logger.WriteLine(stage);
-				  package.AddStage(stage);
+            Logger.WriteLine(stage);
+            package.AddStage(stage);
 
-				  ConnectedDevices[port].ReceivePacakge(package, this);
+			if (SendingDrawDelay == 0)
+				_send(port, package);
+			else
+			{
+				//Используется таймер с задержкй
+				var timer = new System.Timers.Timer(SendingDrawDelay);
+				timer.Elapsed += new System.Timers.ElapsedEventHandler(delegate (object sender, ElapsedEventArgs args)
+				  {
+					  _send(port, package);
+					  timer.Stop();
 
-				  timer.Stop();
+				  });
 
-			  });
+				//Сообщаем подложке, что надо начать рисовать графон
+                if (Drawer is NetDrawer)
+                    DrawPackage(port);
 
-			timer.Start();
+				timer.Start();
 
-			
+			}
+		}
+
+        /// <summary>
+        /// Позволяет переопределить параметры, передаваемые для отрисовки
+        /// </summary>
+        /// <param name="port"></param>
+        public virtual void DrawPackage(int port)
+        {
+            Drawer.DrawPackage(this.GetControl(), ConnectedDevices[port].GetControl(), SendingDrawDelay);
+        }
+
+		private void _send(int port, Package package)
+		{
+			ConnectedDevices[port].ReceivePacakge(package, this);
 		}
 
 		//Переводит состояние трассировки в строку

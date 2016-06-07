@@ -45,7 +45,8 @@ namespace NetworkComponents.Controls
 				device.Left += delta_x;
 				device.Top += delta_y;
 
-				DeviceMove?.Invoke(new Point(device.Left, device.Top), device);
+                if(DeviceMove!=null)
+				    DeviceMove.Invoke(new Point(device.Left, device.Top), device);
 			}
 		}
 

@@ -12,7 +12,8 @@ namespace NetworkComponents.Controls
 {
 	public partial class Hub : AbstractNetworkDevice
 	{
-		public int InterfacesCount_U { get; set; } = 8;
+        private int count = 8;
+        public int InterfacesCount_U { get { return count; } set { count = value; } } 
 		public override int InterfacesCount { get { return InterfacesCount_U; } }
 		public Hub()
 		{

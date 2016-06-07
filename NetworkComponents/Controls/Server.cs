@@ -40,7 +40,7 @@ namespace NetworkComponents.Controls
 			this.proxy_table = new List<Proxy>();
 			foreach (var p in proxy)
 			{
-				this.proxy_table.Add(Proxy.Parse(p));
+				this.proxy_table.AddRange(Proxy.Parse(p));
 			}
 		}
 
@@ -70,12 +70,13 @@ namespace NetworkComponents.Controls
 
 				package.EndIP.Pop();
 				if (package.EndIP.Count == 0)
-				{				
+				{
+                    package.EndIP.Push(InterfaceAdresses[port].IP);
+
 					stage = Name + " (" + InterfaceAdresses[port] + ") received package "+package+"from " + package.StartIP;
 					Logger.WriteLine(stage);
 					package.AddStage(stage);
 					package.PackageState = Package.State.RECEIVED;
-					package.EndIP.Push(InterfaceAdresses[port].IP);
 					PackageManager.AddPackage(package);
 					return;
 				}
@@ -103,7 +104,10 @@ namespace NetworkComponents.Controls
 					package.AddStage(stage);
 					package.PackageState = Package.State.NO_ROUTE;
 					PackageManager.AddPackage(package);
+
+					return;
 				}
+
 
 				if (route.NextRouter != null)
 					package.EndIP.Push(route.NextRouter);
@@ -126,10 +130,16 @@ namespace NetworkComponents.Controls
 		private void send(Package package, int port)
 		{
 			//Проверяем, находится ли получатель в той же подсети
-			if (InterfaceAdresses[port].IsInSameSubnet(package.EndIP.Peek()))
-				send(port, package);
-			else
-				Debug.Write(Name + " (" + InterfaceAdresses[port] + ") DIDN'T send package " + package + " to " + ConnectedDevices[port].Name + ": OTHER SUBNET");
+            if (InterfaceAdresses[port].IsInSameSubnet(package.EndIP.Peek()))
+                send(port, package);
+            else
+            {
+                string stage = Name + " (" + InterfaceAdresses[port] + ") DIDN'T send package " + package + " to " + ConnectedDevices[port].Name + ": OTHER SUBNET";
+                Logger.WriteLine(stage);
+                package.AddStage(stage);
+                package.PackageState = Package.State.REJECTED;
+                PackageManager.AddPackage(package);
+            }
 		}
 			
 
@@ -152,6 +162,8 @@ namespace NetworkComponents.Controls
 
 		private Route get_route(IPAddress adress)
 		{
+            if (route_table == null) return null;
+
 			foreach(var route in route_table)
 			{
 				if ((route.Destination == null) || (IPAddressWithMask.IsInSameSubnet(adress, route.Destination, route.Mask)))

@@ -1,0 +1,6 @@
+# VISUAL STUDIO BUILD FILES
+bin/*
+obj/*
+
+# VISUAL STUDIO WTF
+*.suo

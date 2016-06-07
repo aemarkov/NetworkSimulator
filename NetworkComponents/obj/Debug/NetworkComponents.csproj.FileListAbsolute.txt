@@ -11,3 +11,16 @@ D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.C
 D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.csprojResolveAssemblyReference.cache
 D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.Hub.resources
 D:\Programming\_STUDY\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.Server.resources
+C:\Users\Student\Documents\Visual Studio 2013\Projects\NetworkSim\NetworkComponents\bin\Debug\NetworkComponents.dll
+C:\Users\Student\Documents\Visual Studio 2013\Projects\NetworkSim\NetworkComponents\bin\Debug\NetworkComponents.pdb
+C:\Users\Student\Documents\Visual Studio 2013\Projects\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.AbstractNetworkDevice.resources
+C:\Users\Student\Documents\Visual Studio 2013\Projects\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.Gate.resources
+C:\Users\Student\Documents\Visual Studio 2013\Projects\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.Hub.resources
+C:\Users\Student\Documents\Visual Studio 2013\Projects\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.NetDrawer.resources
+C:\Users\Student\Documents\Visual Studio 2013\Projects\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.PC.resources
+C:\Users\Student\Documents\Visual Studio 2013\Projects\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.PCGroup.resources
+C:\Users\Student\Documents\Visual Studio 2013\Projects\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.Controls.Server.resources
+C:\Users\Student\Documents\Visual Studio 2013\Projects\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.csproj.GenerateResource.Cache
+C:\Users\Student\Documents\Visual Studio 2013\Projects\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.dll
+C:\Users\Student\Documents\Visual Studio 2013\Projects\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.pdb
+C:\Users\Student\Documents\Visual Studio 2013\Projects\NetworkSim\NetworkComponents\obj\Debug\NetworkComponents.csprojResolveAssemblyReference.cache

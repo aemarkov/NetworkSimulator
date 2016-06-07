@@ -19,6 +19,10 @@ namespace NetworkComponents.Controls
 	/// </summary>
 	public partial class PC : AbstractNetworkDevice
 	{
+        //Родительская группа
+        //Костыль-костыль
+        private PCGroup parent_group;
+
 		public override int InterfacesCount { get { return 1; } }
 
 		/// <summary>
@@ -35,7 +39,10 @@ namespace NetworkComponents.Controls
 			InitializeComponent();
 		}
 
-
+        public PC(PCGroup parent):this()
+        {
+            parent_group = parent;
+        }
 
 		/*
 		 * Если адрес получителя совпадает - то принимаем пакет, 
@@ -96,5 +103,20 @@ namespace NetworkComponents.Controls
 				MessageBox.Show("Invalid IP-Address");
 			}
 		}
+
+        /*public override void DrawPackage(int port)
+        {
+            Drawer.DrawPackage(parent_group as Control ?? this as Control, ConnectedDevices[port], SendingDrawDelay);
+        }*/
+
+        /// <summary>
+        /// Возвращает контрол этого объекта.
+        /// Костыль, чтобы ПК мог нормально работать в PCGroup
+        /// </summary>
+        /// <returns></returns>
+        public override Control GetControl()
+        {
+            return parent_group as Control ?? this as Control;
+        }
 	}
 }
