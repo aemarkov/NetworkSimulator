@@ -3,7 +3,9 @@
 
 Моделирует передачу в локальной сети между устройствами и отображает путь пакета. Создан в рамках курсового проекта по курсу `Сети ЭВМ и телекоммуникации`
 
-![](https://github.com/Garrus007/NetworkSimulator/blob/master/screenshots/overview.jpg)
+![Значок ютуба](http://findicons.com/files/icons/2155/social_media_bookmark/32/youtube.png)[Посмотреть на YouTube](https://www.youtube.com/watch?feature=player_embedded&v=JW3ugIRKrgU)
+
+![Скриншот](https://github.com/Garrus007/NetworkSimulator/blob/master/screenshots/overview.jpg)
 
 ## Возможности:
   - Создание сети из ПК, хабов, роуетров
