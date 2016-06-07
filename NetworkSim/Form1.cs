@@ -28,22 +28,21 @@ namespace NetworkSim
 
 
 			pcGroup1.SetPCs("192.168.1.2", "192.168.1.3", "255.255.255.0", "192.168.1.1");
-			pcGroup2.SetPCs("192.168.2.2", "192.168.2.3", "255.255.255.0", "192.168.2.1");
 
-			server1.SetIP("192.168.1.1/24", "192.168.10.1/24", "192.168.100.1/24", "192.168.100.1/24");
-			server3.SetIP("192.168.2.1/24", "192.168.11.1/24");
-			server2.SetIP("192.168.10.2/24", "192.168.11.2/24");
-			
+			admin.SetIP("192.168.2.10/24");
+			admin.SetGateway("192.168.2.1");
+
+			server1.SetIP("192.168.1.1/24", "192.168.2.1/24");
+			server1.SetProxy(
+				@"any;any;pass");
+
+			server1.SetRoute(
+				@"192.168.2.0;255.255.255.0;-;1
+                  192.168.1.0;255.255.255.0;-;0");
 
 			pcGroup1.Connect(hub1, 1);
-			pcGroup2.Connect(hub2, 1);
-
 			hub1.DuplexConnect(0, 0, server1);
-			hub2.DuplexConnect(0, 0, server3);
-
-			server1.DuplexConnect(1, 0, server2);
-			server3.DuplexConnect(1, 1, server2);
-
+			server1.DuplexConnect(1, 0, admin);
 
 			netDrawer1.Init();
 			netDrawer1.UpdateConnections();
@@ -58,27 +57,32 @@ namespace NetworkSim
 		//Новый пакет сгенерирован
 		private void PackageManager_NewPackage(Package pckg)
 		{
-			table_packages.Rows.Clear();
-
-			foreach (var package in PackageManager.Pacakges)
+			this.InvokeEx(x =>
 			{
-				int id = table_packages.Rows.Add();
-				table_packages.Rows[id].Cells[0].Value = package.ToString();
-				table_packages.Rows[id].Cells[1].Value = package.PackageState;
+				x.table_packages.Rows.Clear();
 
-				if (package.PackageState == Package.State.SENDING)
-					table_packages.Rows[id].DefaultCellStyle.BackColor = Color.Yellow;
-				else if (package.PackageState == Package.State.RECEIVED)
-					table_packages.Rows[id].DefaultCellStyle.BackColor = Color.Green;
-				else
-					table_packages.Rows[id].DefaultCellStyle.BackColor = Color.Red;
-			}
+				foreach (var package in PackageManager.Pacakges)
+				{
+					int id = x.table_packages.Rows.Add();
+					x.table_packages.Rows[id].Cells[0].Value = package.ToString();
+					x.table_packages.Rows[id].Cells[1].Value = package.PackageState;
+
+					if (package.PackageState == Package.State.SENDING)
+						x.table_packages.Rows[id].DefaultCellStyle.BackColor = Color.Yellow;
+					else if (package.PackageState == Package.State.RECEIVED)
+						x.table_packages.Rows[id].DefaultCellStyle.BackColor = Color.Green;
+					else
+						x.table_packages.Rows[id].DefaultCellStyle.BackColor = Color.Red;
+				}
+			});
 		}
 
 		//Новое сообщение в лог
 		private void Logger_TextWrited(string obj)
 		{
-			txtLog.Text += obj;
+			this.InvokeEx(x => x.txtLog.Text += obj);
+
+			//txtLog.Text += obj;
 		}
 
 		//Удаление всех пакетов из мониторинга

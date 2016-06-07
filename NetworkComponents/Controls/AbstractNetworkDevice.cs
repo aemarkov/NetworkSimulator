@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
+using System.Timers;
 
 namespace NetworkComponents.Controls
 {
@@ -173,22 +174,29 @@ namespace NetworkComponents.Controls
 			if (!ConnectedDevices.ContainsKey(port))
 				throw new ArgumentException("Device to this port not connected");
 
-			PackageManager.AddPackage(package);
+			var timer = new System.Timers.Timer(2000);
+			timer.Elapsed += new System.Timers.ElapsedEventHandler(delegate (object sender, ElapsedEventArgs args)
+			  {
+				  PackageManager.AddPackage(package);
 
-			String stage;
-			if (InterfaceAdresses!=null)
-				stage = TraceToString(Name, InterfaceAdresses[port], port, ConnectedDevices[port].Name, package);
-			else
-				stage = TraceToString(Name, null, port, ConnectedDevices[port].Name, package);
+				  String stage;
+				  if (InterfaceAdresses != null)
+					  stage = TraceToString(Name, InterfaceAdresses[port], port, ConnectedDevices[port].Name, package);
+				  else
+					  stage = TraceToString(Name, null, port, ConnectedDevices[port].Name, package);
 
-			Logger.WriteLine(stage);
-			package.AddStage(stage);
+				  Logger.WriteLine(stage);
+				  package.AddStage(stage);
 
-			//Проверяем, находится ли получатель в той же подсети
-			//if (InterfaceAdresses!=null && !InterfaceAdresses[port].IsInSameSubnet(package.EndIP.Peek()))
-			//	return; 
+				  ConnectedDevices[port].ReceivePacakge(package, this);
 
-			ConnectedDevices[port].ReceivePacakge(package, this);
+				  timer.Stop();
+
+			  });
+
+			timer.Start();
+
+			
 		}
 
 		//Переводит состояние трассировки в строку

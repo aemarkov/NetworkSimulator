@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlockingList.cs" />
     <Compile Include="Controls\AbstractNetworkDevice.cs">
       <SubType>UserControl</SubType>
     </Compile>
