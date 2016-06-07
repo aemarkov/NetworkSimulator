@@ -58,14 +58,14 @@ namespace NetworkSim
             //S2
             server2.SetIP("197.253.86.2/24", "197.253.92.2/24");
             server2.SetProxy("any;any;pass");
+			server2.SetRoute(
+				@"197.253.67.0;255.255.255.0;197.253.92.1;1
+                  197.253.86.0;255.255.255.0;-;0");
             hub2.DuplexConnect(0, 0, server2);
 
             //S21
             server21.SetIP("192.168.1.1/24", "197.253.86.100/24");
             server21.SetProxy("any;any;pass");
-            server21.SetRoute(
-                @"192.168.1.0;255.255.255.0;-;0
-                  197.253.0.0;255.255.0.0;197.253.86.2;1");
 
             hub21.DuplexConnect(0, 0, server21);
             server21.DuplexConnect(1, 1, hub2);
@@ -75,7 +75,8 @@ namespace NetworkSim
             server.SetProxy("any;any;pass");
             server.SetRoute(
                 @"197.253.67.10;255.255.255.255;-;3
-                  197.253.85.0;255.255.255.0;197.253.91.2;0");
+                  197.253.85.0;255.255.255.0;197.253.91.2;0
+				  197.253.86.0;255.255.255.0;197.253.92.2;1");
 
             //Admin
             admin.SetIP("197.253.67.10/24");
